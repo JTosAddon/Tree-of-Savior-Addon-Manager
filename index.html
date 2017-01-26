@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="app">
+<html lang="ja" data-ng-app="app">
 	<head>
 		<meta charset="UTF-8">
 		<title>Tree of Savior Addon Manager</title>
@@ -15,7 +15,7 @@
 				<div id="top" ></div>
 				<div class="content">
 					<md-tabs data-ng-show="vm.showTab()" md-stretch-tabs md-border-bottom  md-selected="vm.selectedIndex">
-						<md-tab label="Settings"></md-tab>
+						<md-tab label="設定"></md-tab>
 						<md-tab label="IToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="JToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
@@ -24,8 +24,8 @@
 				</div>
 			</div>
 			<div id="footer" md-whiteframe="3">
-				<md-button  class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">Go TOP</md-button>
-				<md-button data-ng-click="vm.launchGame();" class="md-raised">Open ToS JP Site</md-button>
+				<md-button  class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">上に戻る</md-button>
+				<md-button data-ng-click="vm.launchGame();" class="md-raised">公式サイトへ</md-button>
 			</div>
 		</div>
 
