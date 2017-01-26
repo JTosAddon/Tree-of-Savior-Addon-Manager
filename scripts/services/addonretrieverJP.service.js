@@ -16,10 +16,6 @@
 		var existTwitterAccount = false		
 		return service;
 
-		function getXml(url){
-
-		}
-
 		function getAddons(callback) {
 			var JTos = settings.JTos
 			settings.getInstalledAddons(function(installedAddons) {
