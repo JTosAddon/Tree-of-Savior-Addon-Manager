@@ -10,6 +10,15 @@
         "SCROLL_TO_TOP": "上に戻る（未訳）",
         "OPEN_OFFICIAL_SITE": "公式サイトへ（未訳）"
     },
+    "SETTINGS": {
+        "NEED_UPDATE": "最新のマネージャーにアップデートしてください（未訳）",
+        "DOWNLOAD": "ダウンロード（未訳）",
+        "CONFIGURE_FOLDER": "Tree of Saviorのインストールフォルダを指定してください。（未訳）",
+        "OPEN_FOLDER_BROWSE_DIALOG": "開く（未訳）",
+        "INVALID_FOLDER": "アドオンをインストールする前に、Tree of Saviorの正しいインストールフォルダを指定してください。（未訳）",
+        "INSTALL_HISTORY": "インストール履歴を（未訳）",
+        "CLEAR": "初期化する（未訳）"
+    },
     "BROWSE": {
         "SEARCH": "Search",
         "ALL": "All",

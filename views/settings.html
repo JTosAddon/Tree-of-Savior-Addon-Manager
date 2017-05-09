@@ -1,25 +1,25 @@
 <md-content class="md-padding">
-	<div   style="color:red"  data-ng-show="!vm.isLatestVersion()" >
+	<div style="color:red" data-ng-show="!vm.isLatestVersion()" >
 		<p style="color:black">This Version v<span>{{vm.thisVersion}}</span></p>
 		<p>Latest Version v<span>{{vm.latestVersion}}</span></p>
-		<h3><strong>最新のマネージャーにアップデートしてください</strong>
-			<a href="https://github.com/JTosAddon/Tree-of-Savior-Addon-Manager/releases">ダウンロード</a>
+		<h3><strong>{{ 'SETTINGS.NEED_UPDATE' | translate }}</strong>
+			<a href="https://github.com/JTosAddon/Tree-of-Savior-Addon-Manager/releases">{{ 'SETTINGS.DOWNLOAD' | translate }}</a>
 		</h3>
 	</div>
-	<p><strong>Tree of Saviorのインストールフォルダを指定してください。</strong></p>
+	<p><strong>{{ 'SETTINGS.CONFIGURE_FOLDER' | translate }}</strong></p>
 	<md-content layout-padding>
 		<form name="userForm">
 			<div layout-gt-sm="row">
 				<md-input-container class="md-block" flex-gt-sm>
 					<span>{{vm.treeOfSaviorDirectory}}</span>
-					<md-button class="md-raised" ng-click="vm.browseForDirectory();">開く</md-button>
+					<md-button class="md-raised" ng-click="vm.browseForDirectory();">{{ 'SETTINGS.OPEN_FOLDER_BROWSE_DIALOG' | translate }}</md-button>
 				</md-input-container>
 			</div>
-			<span data-ng-show="!vm.isValidDirectory();"><p class="error">アドオンをインストールする前に、正しいTree of Saviorのインストールフォルダを指定してください。</p></span>
+			<span data-ng-show="!vm.isValidDirectory();"><p class="error">{{ 'SETTINGS.INVALID_FOLDER' | translate }}</p></span>
 		</form>
 	</md-content>
 	<div id="hoge"></div>
-	<h3>インストール履歴を
-		<md-button class="md-warn md-raised" ng-click="vm.resetInstalledAddons();">初期化する</md-button>
+	<h3>{{ 'SETTINGS.INSTALL_HISTORY' | translate }}
+		<md-button class="md-warn md-raised" ng-click="vm.resetInstalledAddons();">{{ 'SETTINGS.CLEAR' | translate }}</md-button>
 	</h3>
 </md-content>
