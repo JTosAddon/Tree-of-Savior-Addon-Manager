@@ -3,7 +3,7 @@
 
 		angular.module('app', [
 				'ui.router',
-		'ngResource',
+				'ngResource',
 				'ngMaterial',
 				'ngAnimate',
 				'ngCookies',
@@ -27,11 +27,6 @@
 					url: '/settings',
 					templateUrl: 'views/settings.html',
 					controller: 'SettingsController as vm'
-				})
-				.state('featured', {
-					url: '/featured',
-					templateUrl: 'views/featured.html',
-					controller: 'FeaturedController as featuredController'
 				})
 				.state('JToS', {
 					url: '/browseJP',
