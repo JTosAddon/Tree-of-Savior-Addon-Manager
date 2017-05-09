@@ -1,8 +1,18 @@
 {
     "TITLE": "Tree of Savior Addon Manager",
+    "TAB": {
+        "SETTINGS": "設定（未訳）",
+        "ITOS": "IToS（未訳）",
+        "JTOS": "JToS（未訳）"
+    },
+    "FOOTER": {
+        "RELOAD": "ページの更新（未訳）",
+        "SCROLL_TO_TOP": "上に戻る（未訳）",
+        "OPEN_OFFICIAL_SITE": "公式サイトへ（未訳）"
+    },
     "ADDONS": {
-        "README": "詳細",
-        "CLOSE_README": "閉じる",
+        "README": "詳細（未訳）",
+        "CLOSE_README": "閉じる（未訳）",
         "INSTALL": "Install",
         "UPDATE": "Update",
         "UNINSTALL": "Uninstall"

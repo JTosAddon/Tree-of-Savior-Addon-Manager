@@ -1,6 +1,16 @@
 
 {
     "TITLE": "Tree of Saviorアドオンマネージャー",
+    "TAB": {
+        "SETTINGS": "設定",
+        "ITOS": "IToS",
+        "JTOS": "JToS"
+    },
+    "FOOTER": {
+        "RELOAD": "ページの更新",
+        "SCROLL_TO_TOP": "上に戻る",
+        "OPEN_OFFICIAL_SITE": "公式サイトへ"
+    },
     "ADDONS": {
         "README": "詳細",
         "CLOSE_README": "閉じる",

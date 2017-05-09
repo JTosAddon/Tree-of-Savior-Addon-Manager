@@ -15,9 +15,9 @@
 				<div id="top" ></div>
 				<div class="content">
 					<md-tabs data-ng-show="vm.showTab()" md-stretch-tabs md-border-bottom  md-selected="vm.selectedIndex">
-						<md-tab label="設定"></md-tab>
-						<md-tab label="IToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
-						<md-tab label="JToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
+						<md-tab label="{{ 'TAB.SETTINGS' | translate }}"></md-tab>
+						<md-tab label="{{ 'TAB.ITOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
+						<md-tab label="{{ 'TAB.JTOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
 					<div id="content" ui-view flex></div>
 				</div>
@@ -27,9 +27,9 @@
 					<md-option value="en">EN</md-option>
 					<md-option value="ja">JA</md-option>
 				</md-select>
-				<md-button	class="md-raised" style="float:left"data-ng-click="reloadRoute()">ページの更新</md-button>
-				<md-button	class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">上に戻る</md-button>
-				<md-button data-ng-click="vm.launchGame();" class="md-raised">公式サイトへ</md-button>
+				<md-button	class="md-raised" style="float:left"data-ng-click="reloadRoute()">{{ 'FOOTER.RELOAD' | translate }}</md-button>
+				<md-button	class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">{{ 'FOOTER.SCROLL_TO_TOP' | translate }}</md-button>
+				<md-button data-ng-click="vm.launchGame();" class="md-raised">{{ 'FOOTER.OPEN_OFFICIAL_SITE' | translate }}</md-button>
 			</div>
 		</div>
 
