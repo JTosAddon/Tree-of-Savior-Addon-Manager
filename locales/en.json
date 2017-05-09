@@ -10,6 +10,19 @@
         "SCROLL_TO_TOP": "上に戻る（未訳）",
         "OPEN_OFFICIAL_SITE": "公式サイトへ（未訳）"
     },
+    "BROWSE": {
+        "SEARCH": "Search",
+        "ALL": "All",
+        "INSTALLED": "Installed",
+        "UNINSTALLED": "Uninstalled",
+        "SHOW_ONLY_UPDATABLE": "UPDATEのみを表示する（未訳）",
+        "UPDATE_ALL_ADDONS": "全てのアドオンを更新する（未訳）",
+        "SORT_BY_NAME_ASC": "名前(昇順)（未訳）",
+        "SORT_BY_NAME_DESC": "名前(降順)（未訳）",
+        "SORT_BY_DATE_ASC": "日付(昇順)（未訳）",
+        "SORT_BY_DATE_DESC": "日付(降順)（未訳）",
+        "SORT_BY_DEVELOPER_NAME": "開発者（未訳）"
+    },
     "ADDONS": {
         "README": "詳細（未訳）",
         "CLOSE_README": "閉じる（未訳）",
