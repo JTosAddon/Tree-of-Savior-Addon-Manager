@@ -18,13 +18,17 @@
 						<md-tab label="設定"></md-tab>
 						<md-tab label="IToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="JToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
-					</md-tabs>		
+					</md-tabs>
 					<div id="content" ui-view flex></div>
 				</div>
 			</div>
-			<div id="footer" md-whiteframe="3">
-				<md-button  class="md-raised" style="float:left"data-ng-click="reloadRoute()">ページの更新</md-button>
-				<md-button  class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">上に戻る</md-button>
+			<div id="footer" md-whiteframe="4">
+				<md-select class="md-menu" style="margin: 0;" data-ng-model="vm.selectedLanguage" data-ng-change="vm.changeLang(vm.selectedLanguage)" aria-label="Language">
+					<md-option value="en">EN</md-option>
+					<md-option value="ja">JA</md-option>
+				</md-select>
+				<md-button	class="md-raised" style="float:left"data-ng-click="reloadRoute()">ページの更新</md-button>
+				<md-button	class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">上に戻る</md-button>
 				<md-button data-ng-click="vm.launchGame();" class="md-raised">公式サイトへ</md-button>
 			</div>
 		</div>

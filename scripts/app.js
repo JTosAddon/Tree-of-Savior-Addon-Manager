@@ -1,13 +1,21 @@
 (function () {
-    'use strict';
+		'use strict';
 
-    angular.module('app', [
-        'ui.router',
+		angular.module('app', [
+				'ui.router',
 		'ngResource',
-        'ngMaterial',
-        'ngAnimate'
-    ])
-    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+				'ngMaterial',
+				'ngAnimate',
+				'ngCookies',
+				'pascalprecht.translate'
+		])
+		.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) {
+			$translateProvider.preferredLanguage('ja');
+			$translateProvider.fallbackLanguage('en');
+			$translateProvider.useMissingTranslationHandlerLog();
+			$translateProvider.useLocalStorage();
+			$translateProvider.useSanitizeValueStrategy('escaped', 'sanitizeParameters');
+
 			$urlRouterProvider.otherwise("/tab");
 
 			$stateProvider
@@ -21,7 +29,7 @@
 					templateUrl: 'views/featured.html',
 					controller: 'FeaturedController as featuredController'
 				})
-				.state('JToS', {	
+				.state('JToS', {
 					url: '/browseJP',
 					templateUrl: 'views/browse.html',
 					controller: 'BrowseControllerJP as browseController'
@@ -36,11 +44,11 @@
 					templateUrl: 'views/installed.html',
 					controller: 'InstalledController as vm'
 				});
-				
+
 			$mdThemingProvider.theme('default')
 				.primaryPalette('blue')
 				.accentPalette('light-green')
 				.warnPalette('red');
-        }
-    ]);
+				}
+		]);
 })();
