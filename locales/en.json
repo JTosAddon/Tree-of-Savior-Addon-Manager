@@ -1,3 +1,10 @@
 {
-    "TITLE": "Tree of Savior Addon Manager"
+    "TITLE": "Tree of Savior Addon Manager",
+    "ADDONS": {
+        "README": "詳細",
+        "CLOSE_README": "閉じる",
+        "INSTALL": "Install",
+        "UPDATE": "Update",
+        "UNINSTALL": "Uninstall"
+    }
 }

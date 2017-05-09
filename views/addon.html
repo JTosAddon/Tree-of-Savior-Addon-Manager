@@ -3,10 +3,10 @@
 		<md-card-title-text>
 			<span class="md-headline">{{vm.addon.name}}
 			<md-button data-ng-click="openWebsite(vm.addon);" class="md-fab" aria-label="github">
-    			<img src="img/GitHub-Mark-64px.png" style="my-img-button" alt="github">
+					<img src="img/GitHub-Mark-64px.png" style="my-img-button" alt="github">
 			</md-button>
 			<md-button class="md-fab"data-ng-show="vm.addon.existTwitterAccount" data-ng-click="openTwitter(vm.addon);" aria-label="twitter">
-    			 <img src="img/twitter.png" style="my-img-button" alt="twitter">
+					 <img src="img/twitter.png" style="my-img-button" alt="twitter">
 			</md-button>
 			</span>
 			<span class="md-subhead">{{vm.addon.author}}</span>
@@ -28,15 +28,15 @@
 		</md-card-title-media>
 	</md-card-title>
 	<md-card-actions layout="row" layout-align="end center">
-		<md-button  data-ng-show="vm.addon.isNew" class="md-raised" data-ng-click="openReadme(vm.addon);">New</md-button>
-		<md-button  data-ng-show="!vm.addon.isShowReadme" class="md-raised" data-ng-click="openReadme(vm.addon);">詳細</md-button>
-		<md-button  data-ng-show="vm.addon.isShowReadme"  class="md-raised" data-ng-click="closeReadme(vm.addon);">閉じる</md-button>
+		<md-button	data-ng-show="vm.addon.isNew" class="md-raised" data-ng-click="openReadme(vm.addon);">New</md-button>
+		<md-button	data-ng-show="!vm.addon.isShowReadme" class="md-raised" data-ng-click="openReadme(vm.addon);">{{ 'ADDONS.README' | translate }}</md-button>
+		<md-button	data-ng-show="vm.addon.isShowReadme"	class="md-raised" data-ng-click="closeReadme(vm.addon);">{{ 'ADDONS.CLOSE_README' | translate }}</md-button>
 
 		<!--<md-button style="background-color:#55acee" >Twitter</md-button>-->
 		<!--<md-button data-ng-click="openWebsite(vm.addon);" class="md-raised">GitHub</md-button>-->
-		<md-button data-ng-click="install(vm.addon);" class="md-raised md-primary" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled">Install</md-button>
-		<md-button data-ng-click="update(vm.addon);" class="md-raised md-accent" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="vm.addon.isUpdateAvailable && vm.addon.isInstalled">Update</md-button>
-		<md-button data-ng-click="uninstall(vm.addon);" class="md-raised md-warn" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">Uninstall</md-button>
+		<md-button data-ng-click="install(vm.addon);" class="md-raised md-primary" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled">{{ 'ADDONS.INSTALL' | translate }}</md-button>
+		<md-button data-ng-click="update(vm.addon);" class="md-raised md-accent" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="vm.addon.isUpdateAvailable && vm.addon.isInstalled">{{ 'ADDONS.UPDATE' | translate }}</md-button>
+		<md-button data-ng-click="uninstall(vm.addon);" class="md-raised md-warn" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">{{ 'ADDONS.UNINSTALL' | translate }}</md-button>
 		<md-progress-circular md-mode="indeterminate" data-ng-show="vm.addon.isDownloading"></md-progress-circular>
 	</md-card-actions>
 </md-card>
