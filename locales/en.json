@@ -1,20 +1,20 @@
 {
     "TAB": {
-        "SETTINGS": "設定（未訳）",
-        "ITOS": "IToS（未訳）",
-        "JTOS": "JToS（未訳）"
+        "SETTINGS": "Settings",
+        "ITOS": "IToS",
+        "JTOS": "JToS"
     },
     "FOOTER": {
         "RELOAD": "ページの更新（未訳）",
-        "SCROLL_TO_TOP": "上に戻る（未訳）",
-        "OPEN_OFFICIAL_SITE": "公式サイトへ（未訳）"
+        "SCROLL_TO_TOP": "Go TOP",
+        "OPEN_OFFICIAL_SITE": "Open JToS site"
     },
     "SETTINGS": {
-        "NEED_UPDATE": "最新のマネージャーにアップデートしてください（未訳）",
-        "DOWNLOAD": "ダウンロード（未訳）",
-        "CONFIGURE_FOLDER": "Tree of Saviorのインストールフォルダを指定してください。（未訳）",
-        "OPEN_FOLDER_BROWSE_DIALOG": "開く（未訳）",
-        "INVALID_FOLDER": "アドオンをインストールする前に、Tree of Saviorの正しいインストールフォルダを指定してください。（未訳）",
+        "NEED_UPDATE": "You need update!!",
+        "DOWNLOAD": "Download",
+        "CONFIGURE_FOLDER": "Configure your settings below. Please specify your Tree of Savior install directory.",
+        "OPEN_FOLDER_BROWSE_DIALOG": "Browse...",
+        "INVALID_FOLDER": "Invalid directory. Please set your proper Tree of Savior directory before continuing.",
         "INSTALL_HISTORY": "インストール履歴を（未訳）",
         "CLEAR": "初期化する（未訳）"
     },
