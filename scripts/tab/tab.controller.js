@@ -37,17 +37,17 @@
 			}
 		});
 		vm.jumpTo = function () {
- 			$location.hash('top');
+			$location.hash('top');
 			$anchorScroll();
 		}
 		vm.showTab = function(){
 			return (settings.JTos.isLoad && settings.ITos.isLoad);
 		};
-    // lang
-    vm.selectedLanguage = $translate.proposedLanguage() || $translate.preferredLanguage();
-    vm.changeLang = function(lang) {
-      $translate.use(lang);
-    };
+
+		vm.selectedLanguage = $translate.proposedLanguage() || $translate.preferredLanguage();
+		vm.changeLang = function(lang) {
+			$translate.use(lang);
+		};
 
 		$scope.reloadRoute = function() {
 			$state.reload();

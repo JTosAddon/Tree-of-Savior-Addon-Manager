@@ -10,6 +10,10 @@
 				'pascalprecht.translate'
 		])
 		.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) {
+			$translateProvider.useStaticFilesLoader({
+				prefix: 'locales/',
+				suffix: '.json'
+			});
 			$translateProvider.preferredLanguage('ja');
 			$translateProvider.fallbackLanguage('en');
 			$translateProvider.useMissingTranslationHandlerLog();
