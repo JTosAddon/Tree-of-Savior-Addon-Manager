@@ -4,7 +4,8 @@
   "description": "An addon manager for Tree of Savior.",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "package": "electron-packager . ToS.Addon.Manager --out=dist --platform=win32 --arch=all --version=1.4.2"
   },
   "repository": {
     "type": "git",
