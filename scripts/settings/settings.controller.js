@@ -20,15 +20,15 @@
 		getAddonsDate($http,vm,JTosSource,settings.JTos)
 		var ITosSource = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/managers.json";
 		getAddonsDate($http,vm,ITosSource,settings.ITos)
-		
+
 		settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
 			vm.treeOfSaviorDirectory = treeOfSaviorDirectory;
 			validateDirectory();
 		});
 
 		vm.browseForDirectory = function() {
-			var remote = require('remote');
-			var dialog = remote.require('dialog');
+			var remote = require('electron').remote;
+			var dialog = remote.dialog;
 			var directories = dialog.showOpenDialog({ properties: ['openDirectory']});
 
 			if(directories && directories.length > 0) {
@@ -74,7 +74,7 @@
 			setting.data = data;
 			vm.latestVersion =  data.version || vm.latestVersion
 			angular.forEach(data.sources, function(source) {
-				_getAddonsDate($http,vm,setting,source,'')				
+				_getAddonsDate($http,vm,setting,source,'')
 			});
 			setting.isLoad = true;
 		});
