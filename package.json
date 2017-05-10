@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package": "electron-packager . ToS.Addon.Manager --out=dist --platform=win32 --arch=all --version=1.4.2"
+    "package": "electron-packager . ToS.Addon.Manager --out=dist --platform=win32 --arch=all --version=1.4.2 --asar"
   },
   "repository": {
     "type": "git",
