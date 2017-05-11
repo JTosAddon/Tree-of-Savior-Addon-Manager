@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package": "electron-packager . ToS.Addon.Manager --out=dist --platform=win32 --arch=all --version=1.4.2 --asar"
+    "package": "electron-packager . ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --version=1.4.2 --asar=true --prune=true --icon=resources/tos-exp-256.ico"
   },
   "repository": {
     "type": "git",
