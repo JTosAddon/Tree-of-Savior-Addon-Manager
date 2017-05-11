@@ -1,16 +1,38 @@
-os: unstable
-build: off
+#-----------------------------#
+#    General configuration    #
+#-----------------------------#
 version: '{build}'
+max_jobs: 1
+
+#---------------------------------#
+#    Environment configuration    #
+#---------------------------------#
 shallow_clone: true
 clone_depth: 1
-artifacts:
-  - path: Addon-Manager.zip
+cache:
+  - node_modules -> package.json
 install:
   - set CI=true
   - npm install -g npm@latest
   - npm install -g electron-packager
   - npm install --production
   - set PATH=%APPDATA%\npm;%PATH%
+
+#---------------------------#
+#    Build configuration    #
+#---------------------------#
+build: off
+
+#---------------------------#
+#    Tests configuration    #
+#---------------------------#
 test_script:
   - npm run package
+after_test:
   - 7z a Addon-Manager.zip -r dist
+
+#-------------------------------#
+#    Artifacts configuration    #
+#-------------------------------#
+artifacts:
+  - path: Addon-Manager.zip
