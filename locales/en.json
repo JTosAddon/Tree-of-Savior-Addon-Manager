@@ -5,9 +5,9 @@
         "JTOS": "JToS"
     },
     "FOOTER": {
-        "RELOAD": "ページの更新（未訳）",
-        "SCROLL_TO_TOP": "Go TOP",
-        "OPEN_OFFICIAL_SITE": "Open JToS site"
+        "RELOAD": "RELOAD",
+        "SCROLL_TO_TOP": "GO TOP",
+        "OPEN_OFFICIAL_SITE": "OPEN JTOS SITE"
     },
     "SETTINGS": {
         "NEED_UPDATE": "You need update!!",
@@ -15,25 +15,25 @@
         "CONFIGURE_FOLDER": "Configure your settings below. Please specify your Tree of Savior install directory.",
         "OPEN_FOLDER_BROWSE_DIALOG": "Browse...",
         "INVALID_FOLDER": "Invalid directory. Please set your proper Tree of Savior directory before continuing.",
-        "INSTALL_HISTORY": "インストール履歴を（未訳）",
-        "CLEAR": "初期化する（未訳）"
+        "INSTALLATION_HISTORY": "Installation History:",
+        "CLEAR": "CLEAR!!"
     },
     "BROWSE": {
         "SEARCH": "Search",
         "ALL": "All",
         "INSTALLED": "Installed",
         "UNINSTALLED": "Uninstalled",
-        "SHOW_ONLY_UPDATABLE": "UPDATEのみを表示する（未訳）",
-        "UPDATE_ALL_ADDONS": "全てのアドオンを更新する（未訳）",
-        "SORT_BY_NAME_ASC": "名前(昇順)（未訳）",
-        "SORT_BY_NAME_DESC": "名前(降順)（未訳）",
-        "SORT_BY_DATE_ASC": "日付(昇順)（未訳）",
-        "SORT_BY_DATE_DESC": "日付(降順)（未訳）",
-        "SORT_BY_DEVELOPER_NAME": "開発者（未訳）"
+        "SHOW_ONLY_UPDATABLE": "Show only updatable",
+        "UPDATE_ALL_ADDONS": "Update all",
+        "SORT_BY_NAME_ASC": "Name(asc)",
+        "SORT_BY_NAME_DESC": "Name(desc)",
+        "SORT_BY_DATE_ASC": "Date(asc)",
+        "SORT_BY_DATE_DESC": "Date(desc)",
+        "SORT_BY_DEVELOPER_NAME": "Developer Name"
     },
     "ADDONS": {
-        "README": "詳細（未訳）",
-        "CLOSE_README": "閉じる（未訳）",
+        "README": "README",
+        "CLOSE_README": "Close",
         "INSTALL": "Install",
         "UPDATE": "Update",
         "UNINSTALL": "Uninstall"

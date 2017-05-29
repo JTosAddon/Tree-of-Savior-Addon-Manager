@@ -16,7 +16,7 @@
         "CONFIGURE_FOLDER": "Tree of Saviorのインストールフォルダを指定してください。",
         "OPEN_FOLDER_BROWSE_DIALOG": "開く",
         "INVALID_FOLDER": "アドオンをインストールする前に、Tree of Saviorの正しいインストールフォルダを指定してください。",
-        "INSTALL_HISTORY": "インストール履歴を",
+        "INSTALLATION_HISTORY": "インストール履歴を",
         "CLEAR": "初期化する"
     },
     "BROWSE": {
