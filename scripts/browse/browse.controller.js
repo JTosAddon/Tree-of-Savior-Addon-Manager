@@ -5,25 +5,47 @@
 		.module('app')
 		.controller('BrowseController', BrowseController);
 
-	BrowseController.$inject = ['$scope', '$http', 'addonretriever', 'installer','settings', '$log','SharedScopes'];
+	BrowseController.$inject = [
+    '$scope', '$http', 'addonretriever', 'installer','settings', '$log',
+    'SharedScopes', '$translate'
+  ];
 
-	function BrowseController($scope, $http, addonretriever,installer, settings, $log,SharedScopes) {
-		var viewModel = this;
-		this.sort ="name"
+	function BrowseController(
+    $scope, $http, addonretriever,installer, settings, $log,
+    SharedScopes, $translate
+  ) {
+		const vm = this;
+		this.sort = "name";
+
 		addonretriever.getAddons(function(addons) {
-			viewModel.addons = addons;
+			vm.addons = addons;
 		});
 
 		addonretriever.getDependencies(function(dependencies) {
 			$log.info(JSON.stringify(dependencies));
 		});
+
 		$scope.updateAllAddons = function(){
-			for(let i = 0;i< viewModel.addons.length - 1;i++){
-				let addon = viewModel.addons[i]
-				if(addon.isUpdateAvailable)
+			const updatelist = '';
+
+			for(let i = 0;i< vm.addons.length - 1;i++){
+				let addon = vm.addons[i]
+
+				if(addon.isUpdateAvailable){
 					installer.update(addon)
+					updatelist += addon.name + '\n';
+				}
 			}
-			SharedScopes.getScope('TabController').reloadRoute()
+
+			if(updatelist !== ''){
+				alert(`${updatelist}${$translate.inject('ADDONS.UPDATE_LIST_SUCCESS')}`);
+
+				setTimeout(()=>{
+					SharedScopes.getScope('TabController').reloadRoute()
+				}, 3000)
+			} else {
+        alert($translate.instant('ADDONS.UPDATE_LIST_BLANK'));
+			}
 		}
 	}
 })();

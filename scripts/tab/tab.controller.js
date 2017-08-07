@@ -5,10 +5,16 @@
 		.module('app')
 		.controller('TabController', TabController);
 
-	TabController.$inject = ['$scope', '$location',  '$anchorScroll', 'settings', '$state', 'SharedScopes', '$translate'];
+	TabController.$inject = [
+    '$scope', '$location',  '$anchorScroll', 'settings', '$state', 'SharedScopes',
+    '$translate'
+  ];
 
 	/* @ngInject */
-	function TabController($scope, $location, $anchorScroll, settings, $state, SharedScopes, $translate) {
+	function TabController(
+    $scope, $location, $anchorScroll, settings, $state, SharedScopes,
+    $translate
+  ) {
 		var vm = this;
 
 		vm.selectedIndex = 0;
@@ -18,7 +24,10 @@
 		};
 
 		vm.launchGame = function() {
-			require("shell").openExternal("http://tos.nexon.co.jp/players");
+      const urlPath = $translate.instant('TOS.SITE_URL')
+      console.log(urlPath)
+
+			require("shell").openExternal(urlPath);
 		};
 
 		$scope.$watch('vm.selectedIndex', function(current, old) {

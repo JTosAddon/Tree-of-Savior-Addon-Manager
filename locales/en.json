@@ -7,7 +7,7 @@
     "FOOTER": {
         "RELOAD": "RELOAD",
         "SCROLL_TO_TOP": "BACK TO TOP",
-        "OPEN_OFFICIAL_SITE": "OPEN JTOS SITE"
+        "OPEN_OFFICIAL_SITE": "GO TO OFFICIAL SITE"
     },
     "SETTINGS": {
         "NEED_UPDATE": "Update needed!",
@@ -16,7 +16,8 @@
         "OPEN_FOLDER_BROWSE_DIALOG": "Browse...",
         "INVALID_FOLDER": "Invalid directory. Please set a proper Tree of Savior directory before continuing.",
         "INSTALLATION_HISTORY": "Installation History:",
-        "CLEAR": "CLEAR!!"
+        "CLEAR": "CLEAR!!",
+        "CLEAR_DEFAULT_ERROR": "Initialize error: Couldn't find required file."
     },
     "BROWSE": {
         "SEARCH": "Search",
@@ -36,6 +37,11 @@
         "CLOSE_README": "Close",
         "INSTALL": "Install",
         "UPDATE": "Update",
-        "UNINSTALL": "Uninstall"
+        "UNINSTALL": "Uninstall",
+        "UPDATE_LIST_SUCCESS": " has been updated.",
+        "UPDATE_LIST_BLANK": "There are no addons to update."
+    },
+    "TOS": {
+      "SITE_URL": "https://treeofsavior.com"
     }
 }

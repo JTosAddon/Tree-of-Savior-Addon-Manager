@@ -17,7 +17,8 @@
         "OPEN_FOLDER_BROWSE_DIALOG": "開く",
         "INVALID_FOLDER": "アドオンをインストールする前に、Tree of Saviorの正しいインストールフォルダを指定してください。",
         "INSTALLATION_HISTORY": "インストール履歴を",
-        "CLEAR": "初期化する"
+        "CLEAR": "初期化する",
+        "CLEAR_DEFAULT_ERROR": "初期化しました"
     },
     "BROWSE": {
         "SEARCH": "Search",
@@ -37,6 +38,11 @@
         "CLOSE_README": "閉じる",
         "INSTALL": "Install",
         "UPDATE": "Update",
-        "UNINSTALL": "Uninstall"
+        "UNINSTALL": "Uninstall",
+        "UPDATE_LIST_SUCCESS": "アップデートするアドオンがありません",
+        "UPDATE_LIST_BLANK": "をアップデートしました"
+    },
+    "TOS": {
+      "SITE_URL": "http://tos.nexon.co.jp/players"
     }
 }

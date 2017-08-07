@@ -5,14 +5,14 @@
 		.module('app')
 		.controller('SettingsController', SettingsController);
 
-	SettingsController.$inject = ['$http','settings'];
+	SettingsController.$inject = ['$http','settings','$translate'];
 
 	var xml2js = require('xml2js'),
 	    parser = new xml2js.Parser(),
 		moment = require('moment')
 
 	/* @ngInject */
-	function SettingsController($http,settings) {
+	function SettingsController($http,settings,$translate) {
 		var vm = this;
 		vm.thisVersion = require('./package.json').version;
 		vm.latestVersion = vm.thisVersion
@@ -45,14 +45,12 @@
 			return (vm.thisVersion == vm.latestVersion)?true:false;
 		}
 		vm.resetInstalledAddons = function (){
-
 			var data = {installedAddons:null}
+
 			require('electron-json-storage').set("addons", data, function(error) {
-				if(error) {
-					alert(error);
-				} else {
-					alert("初期化しました");
-				}
+        const defaultMessage = $translate.instant('SETTINGS.CLEAR_DEFAULT_ERROR');
+
+        alert(error || defaultMessage);
 			});
 		}
 		function validateDirectory() {

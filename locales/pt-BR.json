@@ -16,7 +16,8 @@
         "OPEN_FOLDER_BROWSE_DIALOG": "Procurar...",
         "INVALID_FOLDER": "Diretório inválido. Por favor especifique o diretório em que seu Tree of SAvior está instalado.",
         "INSTALLATION_HISTORY": "Histórico de instalações:",
-        "CLEAR": "Limpar"
+        "CLEAR": "Limpar",
+        "CLEAR_DEFAULT_ERROR": "Erro de inicialização: Não foi possível encontrar o arquivo necessário."
     },
     "BROWSE": {
         "SEARCH": "Procurar",
@@ -36,6 +37,11 @@
         "CLOSE_README": "Fechar",
         "INSTALL": "Instalar",
         "UPDATE": "Atualizar",
-        "UNINSTALL": "Desinstalar"
+        "UNINSTALL": "Desinstalar",
+        "UPDATE_LIST_SUCCESS": " foram atualizados.",
+        "UPDATE_LIST_BLANK": "Não há addons para atualizar."
+    },
+    "TOS": {
+      "SITE_URL": "https://treeofsavior.com"
     }
 }
