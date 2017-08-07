@@ -1,0 +1,41 @@
+{
+    "TAB": {
+        "SETTINGS": "Configurações",
+        "ITOS": "IToS",
+        "JTOS": "JToS"
+    },
+    "FOOTER": {
+        "RELOAD": "Recarregar",
+        "SCROLL_TO_TOP": "Voltar ao topo",
+        "OPEN_OFFICIAL_SITE": "Ir ao site oficial"
+    },
+    "SETTINGS": {
+        "NEED_UPDATE": "Necessário atualizar",
+        "DOWNLOAD": "Baixar",
+        "CONFIGURE_FOLDER": "Por favor especifique o diretório em que seu Tree of Savior está instalado.",
+        "OPEN_FOLDER_BROWSE_DIALOG": "Procurar...",
+        "INVALID_FOLDER": "Diretório inválido. Por favor especifique o diretório em que seu Tree of SAvior está instalado.",
+        "INSTALLATION_HISTORY": "Histórico de instalações:",
+        "CLEAR": "Limpar"
+    },
+    "BROWSE": {
+        "SEARCH": "Procurar",
+        "ALL": "Todos",
+        "INSTALLED": "Instalados",
+        "UNINSTALLED": "Desinstalados",
+        "SHOW_ONLY_UPDATABLE": "Mostrar somente os que necessitam atualização",
+        "UPDATE_ALL_ADDONS": "Atualizar todos",
+        "SORT_BY_NAME_ASC": "Nome(asc)",
+        "SORT_BY_NAME_DESC": "Nome(desc)",
+        "SORT_BY_DATE_ASC": "Data(asc)",
+        "SORT_BY_DATE_DESC": "Data(desc)",
+        "SORT_BY_DEVELOPER_NAME": "Autor"
+    },
+    "ADDONS": {
+        "README": "README",
+        "CLOSE_README": "Fechar",
+        "INSTALL": "Instalar",
+        "UPDATE": "Atualizar",
+        "UNINSTALL": "Desinstalar"
+    }
+}

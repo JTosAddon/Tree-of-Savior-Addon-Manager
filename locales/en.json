@@ -6,15 +6,15 @@
     },
     "FOOTER": {
         "RELOAD": "RELOAD",
-        "SCROLL_TO_TOP": "GO TOP",
+        "SCROLL_TO_TOP": "BACK TO TOP",
         "OPEN_OFFICIAL_SITE": "OPEN JTOS SITE"
     },
     "SETTINGS": {
-        "NEED_UPDATE": "You need update!!",
+        "NEED_UPDATE": "Update needed!",
         "DOWNLOAD": "Download",
-        "CONFIGURE_FOLDER": "Configure your settings below. Please specify your Tree of Savior install directory.",
+        "CONFIGURE_FOLDER": "Configure your settings below. Please specify your Tree of Savior install directory path.",
         "OPEN_FOLDER_BROWSE_DIALOG": "Browse...",
-        "INVALID_FOLDER": "Invalid directory. Please set your proper Tree of Savior directory before continuing.",
+        "INVALID_FOLDER": "Invalid directory. Please set a proper Tree of Savior directory before continuing.",
         "INSTALLATION_HISTORY": "Installation History:",
         "CLEAR": "CLEAR!!"
     },
