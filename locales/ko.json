@@ -25,12 +25,12 @@
         "ALL": "All",
         "INSTALLED": "Installed",
         "UNINSTALLED": "Uninstalled",
-        "SHOW_ONLY_UPDATABLE": "업데이트 만 표시",
+        "SHOW_ONLY_UPDATABLE": "업데이트만 표시",
         "UPDATE_ALL_ADDONS": "모두 업데이트",
         "SORT_BY_NAME_ASC": "이름 (오름차순)",
-        "SORT_BY_NAME_DESC": "이름 (하강하는)",
+        "SORT_BY_NAME_DESC": "이름(내림차순)",
         "SORT_BY_DATE_ASC": "이름 (오름차순)",
-        "SORT_BY_DATE_DESC": "이름 (하강하는)",
+        "SORT_BY_DATE_DESC": "이름(내림차순)",
         "SORT_BY_DEVELOPER_NAME": "개발자 이름"
     },
     "ADDONS": {
@@ -40,7 +40,7 @@
         "UPDATE": "Update",
         "UNINSTALL": "Uninstall",
         "UPDATE_LIST_SUCCESS": " 업데이트 됨.",
-        "UPDATE_LIST_BLANK": "데이트 할 부가 기능이 없습니다."
+        "UPDATE_LIST_BLANK": "업데이트할 부가 기능이 없습니다"
     },
     "TOS": {
         "SITE_URL": "https://treeofsavior.com"

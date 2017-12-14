@@ -4,9 +4,9 @@
 		.module('app')
 		.factory('addonretrieverJP', addonretrieverJP);
 
-	addonretrieverJP.$inject = ['$log', '$http', 'settings', '$location',  '$anchorScroll'];
+	addonretrieverJP.$inject = ['$log', '$http', 'settings', '$translate'];
 
-	function addonretrieverJP($log, $http, settings) {
+	function addonretrieverJP($log, $http, settings,$translate) {
 		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/managers.json";
 
 		var service = {
@@ -76,6 +76,45 @@
 							addon.date = JTos.date[addon.releaseTag]
 							var moment = require('moment')
 							addon.dateParsed = moment(addon.date).format("YYYY年MM月DD日")
+
+							// get translate description
+							addon.transDesc = {}
+							let db = settings.translateDB
+							if(db[addon.name] && (db[addon.name].fileVersion == addon.fileVersion) && Object.keys(db[addon.name].transDesc).length){
+								addon.transDesc = JSON.parse(db[addon.name].transDesc)
+							}else{
+								var request = require('request')
+								request.get({
+									url:"https://antima-bot-lowlier-columbarium.au-syd.mybluemix.net/users/",
+									headers: {
+									"content-type": "text/plane"
+									},
+									qs : {
+									name : addon.name,
+									fileVersion : addon.fileVersion,
+									lang : $translate.proposedLanguage() ||  $translate.preferredLanguage(),
+									repo: source.repo
+									}
+								},function (error, response, body) {
+									if (!error && response.statusCode == 200) {
+										addon.transDesc = body
+										db[addon.name] = {
+											fileVersion : addon.fileVersion,
+											transDesc : body
+										}
+										settings.saveTranslateDescription()
+									} else {
+									console.log('error: '+ response.statusCode);
+									}
+								})
+							}
+							addon.isShowThisDescription = lang =>{
+								if (!settings.doesTransDesc && !lang)
+									return true
+								if(settings.doesTransDesc && lang == window.localStorage.getItem('NG_TRANSLATE_LANG_KEY'))
+									return true
+								return false
+							}
 							addons.push(addon);
 						});
 					});

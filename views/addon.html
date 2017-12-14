@@ -13,7 +13,11 @@
 			<span class="md-subhead">{{vm.addon.dateParsed}}</span>
 			<md-chips data-ng-model="vm.addon.tags" readonly="true">
 			</md-chips>
-			<p class="md-body-1">{{vm.addon.description}}</p>
+			<p class="md-body-1"  data-ng-show="vm.addon.isShowThisDescription(false)">{{(vm.addon.description)}}</p>
+			
+			<div class="md-body-1" data-ng-repeat="(lang , description) in vm.addon.transDesc">
+				<p  data-ng-show="vm.addon.isShowThisDescription(lang)">{{description}}</p>
+			</div>			
 			<span class="md-body-1" data-ng-show="vm.addon.isInstalled">Installed version: {{vm.addon.installedFileVersion}}</span>
 			<span class="md-body-1">Available version: {{vm.addon.fileVersion}}</span>
 			<span data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href data-ng-click="openIssues(vm.addon);">{{vm.addon.author}}</a>.</p></span>

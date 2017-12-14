@@ -19,19 +19,22 @@
 						<md-tab label="{{ 'TAB.ITOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="{{ 'TAB.JTOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
+					<h1 data-ng-show="vm.isFirstLoad" style="color:red">Please Reboot Addon Manager</h1>
 					<div id="content" ui-view flex></div>
 				</div>
 			</div>
 			<div id="footer" md-whiteframe="4">
+				<md-card md-whiteframe="5">
+				<md-checkbox  ng-model="vm.doesTransDesc"  data-ng-change="vm.changeTranslateDescription()" aria-label="Does translate Description">{{ 'FOOTER.TRANSLATE_DESCRIPTION' | translate }}</md-checkbox>
+				</md-card>
+			
 				<md-select class="md-menu" style="margin: 0;" data-ng-model="vm.selectedLanguage" data-ng-change="vm.changeLang(vm.selectedLanguage)" aria-label="Language">
-					<md-option value="en">EN</md-option>
-					<md-option value="ja">JA</md-option>
-					<md-option value="pt-BR">PT-BR</md-option>
-					<md-option value="es">ES</md-option>
+					<md-option  data-ng-repeat="lang in vm.locales" value="{{lang}}">{{lang | uppercase}}</md-option>
 				</md-select>
-				<md-button	class="md-raised" style="float:left"data-ng-click="reloadRoute()">{{ 'FOOTER.RELOAD' | translate }}</md-button>
-				<md-button	class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">{{ 'FOOTER.SCROLL_TO_TOP' | translate }}</md-button>
+				<md-button	class="md-raised" style="float:left" data-ng-click="reloadRoute()">{{ 'FOOTER.RELOAD' | translate }}</md-button>
+				<md-button	class="md-raised" style="float:left" data-ng-click="vm.jumpTo()">{{ 'FOOTER.SCROLL_TO_TOP' | translate }}</md-button>
 				<md-button data-ng-click="vm.launchGame();" class="md-raised">{{ 'FOOTER.OPEN_OFFICIAL_SITE' | translate }}</md-button>
+				
 			</div>
 		</div>
 

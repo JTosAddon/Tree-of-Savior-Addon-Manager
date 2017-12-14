@@ -20,6 +20,10 @@
 			saveTreeOfSaviorDirectory : saveTreeOfSaviorDirectory,
 			getIsValidDirectory : getIsValidDirectory,
 			setIsValidDirectory : setIsValidDirectory,
+			saveTranslateDescription : saveTranslateDescription,
+			getTranslateDescription:getTranslateDescription,
+			doesTransDesc : true,
+			translateDB : {},
 			JTos : {},
 			ITos : {}
 		};
@@ -95,6 +99,31 @@
 					$log.info("Wrote installed addon to settings: " + settings);
 				}
 			});
+		}
+		function getTranslateDescription(callback) {
+				return storage.get('TranslateDescription', function(error, data) {
+					if(error) {
+						$log.error("Could not get does translate description: " + error);
+					} else {
+						service.translateDB = data.db || {}
+						service.doesTransDesc = data.doesTransDesc || false
+						if(callback)
+							callback(data)
+					}
+				});
+			}
+		function saveTranslateDescription(){
+			let settings = {
+				db : service.translateDB,
+				doesTransDesc : service.doesTransDesc
+			};
+			storage.set("TranslateDescription", settings, function(error) {
+				if(error) {
+					$log.error("Could not save does translate descriptions DB: " + error + " " + settings);
+				} else {
+					$log.info("Wrote does translate description DB: " + settings);
+				}
+			});	
 		}
 
 		function getIsValidDirectory() {

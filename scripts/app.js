@@ -9,14 +9,15 @@
 				'ngCookies',
 				'pascalprecht.translate'
 		])
-		.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$translateProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) {
+		.config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$translateProvider' ,function($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) {
+			
 			$translateProvider.useStaticFilesLoader({
 				prefix: 'locales/',
 				suffix: '.json'
 			});
 			$translateProvider.preferredLanguage('ja');
 			$translateProvider.fallbackLanguage('en');
-			$translateProvider.useMissingTranslationHandlerLog();
+			// $translateProvider	.useMissingTranslationHandlerLog();
 			$translateProvider.useLocalStorage();
 			$translateProvider.useSanitizeValueStrategy('escaped', 'sanitizeParameters');
 

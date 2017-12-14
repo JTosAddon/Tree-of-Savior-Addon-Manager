@@ -1,0 +1,48 @@
+{
+    "TAB": {
+        "SETTINGS": "USTAWIENIA",
+        "ITOS": "IToS",
+        "JTOS": "JToS"
+    },
+    "FOOTER": {
+        "RELOAD": "PRZEŁADUJ",
+        "SCROLL_TO_TOP": "SKOCZ NA GÓRĘ",
+        "OPEN_OFFICIAL_SITE": "OTWÓRZ OFICJALNĄ STRONĘ",
+        "TRANSLATE_DESCRIPTION": "PRZETŁUMACZ OPIS"
+    },
+    "SETTINGS": {
+        "NEED_UPDATE": "Wymagana aktualizacja!",
+        "DOWNLOAD": "Wczytaj",
+        "CONFIGURE_FOLDER": "Skonfiguruj ustawienia poniżej. Proszę podać adres folderu Tree of Savior.",
+        "OPEN_FOLDER_BROWSE_DIALOG": "Przeglądaj...",
+        "INVALID_FOLDER": "Nieprawidłowy folder. Podaj poprawną ścieżkę do Tree of Savior przed kontynuacją.",
+        "INSTALLATION_HISTORY": "Historia instalacji:",
+        "CLEAR": "RESETUJ",
+        "CLEAR_DEFAULT_ERROR": "Problem inicjalizacji: Nie odnaleziono wymaganych plików."
+    },
+    "BROWSE": {
+        "SEARCH": "Wyszukaj",
+        "ALL": "Wszystkie",
+        "INSTALLED": "Zainstalowane",
+        "UNINSTALLED": "Odinstalowane",
+        "SHOW_ONLY_UPDATABLE": "Pokaż jedynie dostępne aktualizacje",
+        "UPDATE_ALL_ADDONS": "Zaktualizuj wszystkie",
+        "SORT_BY_NAME_ASC": "Nazwa (ros)",
+        "SORT_BY_NAME_DESC": "Nazwa (mal)",
+        "SORT_BY_DATE_ASC": "Data (ros)",
+        "SORT_BY_DATE_DESC": "Data (mal)",
+        "SORT_BY_DEVELOPER_NAME": "Twórca"
+    },
+    "ADDONS": {
+        "README": "OPIS",
+        "CLOSE_README": "Zamknij",
+        "INSTALL": "Zainstaluj",
+        "UPDATE": "Zaaktualizuj",
+        "UNINSTALL": "Odinstaluj",
+        "UPDATE_LIST_SUCCESS": " został zaktualizowany.",
+        "UPDATE_LIST_BLANK": "Nie ma żadnych nowych aktualizacji."
+    },
+    "TOS": {
+        "SITE_URL": "https://treeofsavior.com"
+    }
+}

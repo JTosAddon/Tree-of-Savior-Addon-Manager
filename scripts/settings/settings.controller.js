@@ -26,6 +26,8 @@
 			validateDirectory();
 		});
 
+	
+
 		vm.browseForDirectory = function() {
 			var remote = require('electron').remote;
 			var dialog = remote.dialog;
@@ -48,9 +50,8 @@
 			var data = {installedAddons:null}
 
 			require('electron-json-storage').set("addons", data, function(error) {
-        const defaultMessage = $translate.instant('SETTINGS.CLEAR_DEFAULT_ERROR');
-
-        alert(error || defaultMessage);
+				const defaultMessage = $translate.instant('SETTINGS.CLEAR_DEFAULT_ERROR');
+				alert(error || defaultMessage);
 			});
 		}
 		function validateDirectory() {

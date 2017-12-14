@@ -5,7 +5,7 @@
 		.module('app')
 		.directive('addon', addon);
 
-	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings) {
+	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings,$translate) {
 		var directive = {
 			scope: {},
 			restrict: 'E',
@@ -29,7 +29,6 @@
 					addon.isDownloading = false;
 				});
 			}
-
 			scope.uninstall = function(addon) {
 				installer.uninstall(addon, scope);
 			}
@@ -82,8 +81,14 @@
 				$anchorScroll();		
 			}
 			
+			scope.getDescription = addon =>{
+				if(!settings.doesTransDesc || !addon.transDesc)
+					return addon.description
+				else
+					return addon.transDesc[$translate.proposedLanguage()]	
+			}
 
-
+			scope.doesTranslateDescription = ()=>{return settings.doesTransDesc}
 		}
 	}
 

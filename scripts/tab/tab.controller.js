@@ -7,13 +7,13 @@
 
 	TabController.$inject = [
     '$scope', '$location',  '$anchorScroll', 'settings', '$state', 'SharedScopes',
-    '$translate'
+    '$translate' , '$http'
   ];
 
 	/* @ngInject */
 	function TabController(
     $scope, $location, $anchorScroll, settings, $state, SharedScopes,
-    $translate
+    $translate , $http
   ) {
 		var vm = this;
 
@@ -52,6 +52,29 @@
 		vm.showTab = function(){
 			return (settings.JTos.isLoad && settings.ITos.isLoad);
 		};
+
+		// get language pack
+		let fs = require('fs')
+		vm.isFirstLoad = false
+		$http.get('https://raw.githubusercontent.com/JTosAddon/Tree-of-Savior-Addon-Manager/master/locales/locales.json' + "?" + new Date().toString(), {cache: false}).success(function(data) {
+			vm.locales = data;
+			angular.forEach(data, function(lang) {
+				$http.get(`https://raw.githubusercontent.com/JTosAddon/Tree-of-Savior-Addon-Manager/master/locales/${lang}.json` + "?" + new Date().toString()).success(function(sourceData) {
+					try {fs.statSync(`locales/${lang}.json`)}catch(e){console.log(e);vm.isFirstLoad = true}
+					fs.writeFile(`locales/${lang}.json`,JSON.stringify(sourceData, null, '    '))
+				})
+			})
+		})
+		// vm.locales = require('./locales/locales.json')				
+
+		settings.getTranslateDescription(data=>{
+			vm.doesTransDesc = data.doesTransDesc
+		})
+
+		vm.changeTranslateDescription = ()=>{
+			settings.doesTransDesc = vm.doesTransDesc
+			settings.saveTranslateDescription()
+		}
 
 		vm.selectedLanguage = $translate.proposedLanguage() || $translate.preferredLanguage();
 		vm.changeLang = function(lang) {
