@@ -36,7 +36,7 @@ There are two files here named `settings.json` and `addons.json`. `settings.json
 
 ## IToS
 
-Make a pull request to [Tree-of-Savior-Addon-Community/Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
+Make a pull request to [JToSAddon/Addons/tree/itos](https://github.com/JTosAddon/Addons/tree/itos)  in order to update `managers.json` to point to your addon repository. Example:
 
 ```json
 {
