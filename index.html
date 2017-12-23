@@ -4,12 +4,12 @@
 		<meta charset="UTF-8">
 		<title>Tree of Savior Addon Manager</title>
 
-		<link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css" />
+		<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
 		<link rel="stylesheet" href="./css/main.css" />
 		<link rel="stylesheet" href="./css/github-markdown.css" />
 
 	</head>
-	<body style="font-family:'メイリオ',Meiryo UI;" ng-cloak ng-controller="TabController as vm">
+	<body style="font-family:'メイリオ',Meiryo UI;overflow:hidden;" ng-cloak ng-controller="TabController as vm">
 		<div id="wrapper">
 			<div id="body">
 				<div id="top" ></div>
@@ -23,18 +23,33 @@
 					<div id="content" ui-view flex></div>
 				</div>
 			</div>
-			<div id="footer" md-whiteframe="4">
-				<md-card md-whiteframe="5">
-				<md-checkbox  ng-model="vm.doesTransDesc"  data-ng-change="vm.changeTranslateDescription()" aria-label="Does translate Description">{{ 'FOOTER.TRANSLATE_DESCRIPTION' | translate }}</md-checkbox>
-				</md-card>
-			
-				<md-select class="md-menu" style="margin: 0;" data-ng-model="vm.selectedLanguage" data-ng-change="vm.changeLang(vm.selectedLanguage)" aria-label="Language">
-					<md-option  data-ng-repeat="lang in vm.locales" value="{{lang}}">{{lang | uppercase}}</md-option>
-				</md-select>
-				<md-button	class="md-raised" style="float:left" data-ng-click="reloadRoute()">{{ 'FOOTER.RELOAD' | translate }}</md-button>
-				<md-button	class="md-raised" style="float:left" data-ng-click="vm.jumpTo()">{{ 'FOOTER.SCROLL_TO_TOP' | translate }}</md-button>
-				<md-button data-ng-click="vm.launchGame();" class="md-raised">{{ 'FOOTER.OPEN_OFFICIAL_SITE' | translate }}</md-button>
-				
+			<div id="footer" md-whiteframe="4" style="display:inline-block;">
+				<div style="float:left;width:32px;">
+					<md-card md-whiteframe="5" style="margin:0px;margin-left:10px;width:64px">
+						<md-button class="md-icon-button" data-ng-click="vm.openDiscord();" aria-label="discord">
+							<md-tooltip md-direction="top">
+								Discord
+							</md-tooltip>
+							<img src="./img/discord.png" style="width:32px;height:32px;float:left;margin: 0;" alt="discord">
+						</md-button>
+					</md-card>
+				</div>
+
+				<div style="float:left;">
+					<md-card md-whiteframe="5" style="margin:0px;margin-left:200px;">
+						<md-checkbox style="float:left;margin:10px;" ng-model="vm.doesTransDesc"  data-ng-change="vm.changeTranslateDescription()" aria-label="Does translate Description">{{ 'FOOTER.TRANSLATE_DESCRIPTION' | translate }}</md-checkbox>
+					</md-card>
+				</div>
+				<div style="float:right;width:100px;">
+					<md-select class="md-menu" style="margin: 0;width:100px;" data-ng-model="vm.selectedLanguage" data-ng-change="vm.changeLang(vm.selectedLanguage)" aria-label="Language">
+						<md-option  style="margin: 0;width:100px;" data-ng-repeat="lang in vm.locales" value="{{lang}}">{{lang | uppercase}}</md-option>
+					</md-select>
+				</div>
+
+					<md-button	class="md-raised" style="float:right;" data-ng-click="reloadRoute()">{{ 'FOOTER.RELOAD' | translate }}</md-button>
+					<md-button	class="md-raised" style="float:right;" data-ng-click="vm.jumpTo()">{{ 'FOOTER.SCROLL_TO_TOP' | translate }}</md-button>
+					<md-button data-ng-click="vm.launchGame();" style="float:right;" class="md-raised">{{ 'FOOTER.OPEN_OFFICIAL_SITE' | translate }}</md-button>
+
 			</div>
 		</div>
 
@@ -57,6 +72,7 @@
 		<script src="./scripts/tab/tab.controller.js"></script>
 		<script src="./scripts/browse/browse.controller.js"></script>
 		<script src="./scripts/browse/browseJP.controller.js"></script>
+		<script src="./scripts/browse/addonbig.controller.js"></script>
 		<script src="./scripts/installed/installed.controller.js"></script>
 		<script src="./scripts/settings/settings.controller.js"></script>
 		<script src="./scripts/services/addonretriever.service.js"></script>

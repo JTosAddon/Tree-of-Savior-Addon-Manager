@@ -52,6 +52,9 @@
 		vm.showTab = function(){
 			return (settings.JTos.isLoad && settings.ITos.isLoad);
 		};
+		vm.openDiscord = function()	{
+			require('electron').shell.openExternal('https://discord.gg/hgxRFwy');
+		};
 
 		// get language pack
 		let fs = require('fs')

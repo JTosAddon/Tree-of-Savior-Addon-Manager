@@ -26,8 +26,6 @@
 			validateDirectory();
 		});
 
-	
-
 		vm.browseForDirectory = function() {
 			var remote = require('electron').remote;
 			var dialog = remote.dialog;
@@ -67,6 +65,7 @@
 			});
 		}
 	}
+
 	function getAddonsDate($http,vm,sourceUrl,setting){
 		setting.date = {}
 		$http.get(sourceUrl + "?" + new Date().toString(), {cache: false}).success(function(data) {

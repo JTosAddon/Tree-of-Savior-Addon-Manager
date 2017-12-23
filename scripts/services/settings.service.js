@@ -5,9 +5,9 @@
 		.module('app')
 		.factory('settings', settings);
 
-	settings.$inject = ['$log'];
+	settings.$inject = ['$log', '$http'];
 
-	function settings($log) {
+	function settings($log, $http) {
 		const storage = require('electron-json-storage');
 		const addonsFile = "addons";
 		const settingsFile = "settings";
@@ -24,11 +24,53 @@
 			getTranslateDescription:getTranslateDescription,
 			doesTransDesc : true,
 			translateDB : {},
+			TOSVersion : "0",
+			broken_addons : [],
+			getBrokenAddons : getBrokenAddons,
+			isAddonOutdated : isAddonOutdated,
+			isBrokenAddon : isBrokenAddon,
+			addonList : {},
 			JTos : {},
 			ITos : {}
 		};
 
+		service.getBrokenAddons($http, service);
+
 		return service;
+
+
+		function getBrokenAddons($http, service)
+		{
+			var url = "https://raw.githubusercontent.com/MizukiBelhi/Addons/master/broken-addons.json";
+			$http.get(url + "?" + new Date().toString(), {cache: false}).success(function (data){
+				service.TOSVersion = data.tosversion;
+				console.log("ToSVersion: "+service.TOSVersion)
+
+				angular.forEach(data.addons, function(addon){
+					service.broken_addons.push(addon);
+				});
+			});
+		}
+
+		function isBrokenAddon(addon)
+		{
+			var i;
+			for (i = 0; i < this.broken_addons.length; i++) {
+				var baddon = this.broken_addons[i];
+
+				if(((baddon.author === addon.author) && (("v"+baddon.version) === addon.fileVersion) && (baddon.file === addon.file)))
+					return true;
+			}
+			return false;
+		}
+
+		function isAddonOutdated(addon)
+		{
+			if(addon.tosversion < this.TOSVersion)
+				return true;
+			return false;
+		}
+
 
 		function addInstalledAddon(addon) {
 			storage.get(addonsFile, function(error, data) {

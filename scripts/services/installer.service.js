@@ -56,7 +56,6 @@
 		function installDependencies(addon, callback) {
 			addonretriever.getDependencies(function(dependencies) {
 				settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
-
 					angular.forEach(dependencies, function(dependency) {
 						$log.info(`Downloading dependency at ${dependency.url}.`);
 

@@ -24,8 +24,12 @@
                 vm.col = 50
         });
 
-		addonretriever.getAddons(function(addons) {
+        this.addonsLoading = true;
+
+		addonretriever.getAddons(function(addons, addonList) {
 			vm.addons = addons;
+			vm.addonsLoading = false;
+			settings.addonList = addonList;
 		});
 
 		addonretriever.getDependencies(function(dependencies) {
