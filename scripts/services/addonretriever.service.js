@@ -8,7 +8,7 @@
 	addonretriever.$inject = ['$log', '$http', 'settings','$translate','$q', '$sce'];
 
 	function addonretriever($log, $http, settings ,$translate, $q, $sce) {
-		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/managers.json";
+		var masterSources = "https://raw.githubusercontent.com/writ312/Addons/writ312-patch-1/addons.json";
 
 		var service = {
 			getAddons : getAddons,

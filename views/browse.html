@@ -1,10 +1,13 @@
 <div layout="column" layout-padding>
+<md-button ng-click="testFunction()">hoge</md-button>
+<div data-ng-show="!browseController.isShowDetail">
 	<md-card style="height:65px" md-whiteframe="3">
 		<md-input-container  class="md-block">
 			<label><img id="search" src="img/search.png"  alt="search">{{ 'BROWSE.SEARCH' | translate }}</label>
 			<input data-ng-model="browseController.searchQuery">
 		</md-input-container>
 	</md-card>
+	
 	<md-card	md-whiteframe="3">
 		<div layout="row"　layout-align=" center">
 			<md-radio-group layout="row" ng-model="browseController.isInstalled">
@@ -41,11 +44,13 @@
 	<div layout="row" data-ng-show="browseController.addonsLoading" layout-sm="column" layout-align="center center" aria-label="wait" style="height:70px;">
 		<md-progress-circular md-mode="indeterminate" data-ng-show="browseController.addonsLoading"></md-progress-circular>
 	</div>
-
-	<div layout="row" layout-wrap>
+	<div layout="row" layout-wrap >
 		<div flex="50" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter: browseController.searchQuery">
-			<addon addon="addon"></addon>
-		</div>
+			<addon addon="addon" ></addon>
+		</div>	
+
 	</div>
+</div>
+	<detailaddon  data-ng-show="browseController.isShowDetail" addon="browseController.addon"></detailaddon>
 </div>
 

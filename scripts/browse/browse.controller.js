@@ -15,16 +15,17 @@
     SharedScopes, $translate
   ) {
 		const vm = this;
-		this.sort = "name";
+		vm.sort = "name";
+		vm.isShowDetail = false
 
-		require('electron-json-storage').get('settingCol', function(error, col) {
-			console.log(col)
-		    vm.col = col
-            if(typeof col == 'object' )
-                vm.col = 50
-        });
+		// require('electron-json-storage').get('settingCol', function(error, col) {
+		// 	console.log(col)
+		//     vm.col = col
+        //     if(typeof col == 'object' )
+        //         vm.col = 50
+        // });
 
-		this.addonsLoading = true;
+		vm.addonsLoading = true;
 
 		addonretriever.getAddons(function(addons, addonList) {
 			vm.addons = addons;
@@ -36,11 +37,11 @@
 			$log.info(JSON.stringify(dependencies));
 		});
 
-		this.changeCol = ()=>{
-			require('electron-json-storage').set('settingCol',vm.col, error =>{
-				console.log(error)
-			})
-		}
+		// this.changeCol = ()=>{
+		// 	require('electron-json-storage').set('settingCol',vm.col, error =>{
+		// 		console.log(error)
+		// 	})
+		// }
 	
 		$scope.updateAllAddons = function(){
 			let updatelist = '';
@@ -57,6 +58,31 @@
 			else
 				alert($translate.instant('ADDONS.UPDATE_LIST_BLANK'));
 		}
+		// $scope.openReadme = function() {
+		// 	if(!vm.isShowDetail){
+		// 		return;
+		// 	}
+		// 	let addon = vm.addon
+		// 	$log.info("Opening readme");
+		// 	readmeretriever.getReadme(addon, function(success, readme) {
+		// 		if(success) {
+		// 			// var marked = require('marked');
+		// 			marked.setOptions({
+		// 				sanitize: true
+		// 			});
+		// 			scope.$apply(function() {
+		// 				addon.readme = $sce.trustAsHtml(marked(readme));
+		// 				console.log("readme: " + addon.readme);
+		// 		});
+		// 		}
+		// 	});
+		// }
+		// $scope.reloadReadme = function(){
+		// 	$scope.$apply();
+		// }
+		// $scope.testFunction = function(){
+		// 	console.log(vm)
+		// }
 	}
 
 })();

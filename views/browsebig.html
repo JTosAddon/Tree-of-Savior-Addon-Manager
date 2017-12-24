@@ -1,63 +1,63 @@
 
-		<md-card md-whiteframe="3" id="{{browseController.addon.name}}">
+		<md-card md-whiteframe="3" id="{{vm.addon.name}}">
 			<md-button data-ng-click="goBack();" class="md-icon-button" aria-label="back">
-				<img ng-src="{{ browseController.buttons.back }}" ng-style="buttons.style" alt="back">
+				<img ng-src="{{ buttons.back }}" ng-style="buttons.style" alt="back">
 			</md-button>
 			<md-divider></md-divider>
 	<md-card-title>
 		<md-card-title-text>
-			<span class="md-headlines">{{ browseController.addon.name }}
-				<span class="md-subhead"> by {{browseController.addon.author}} - {{browseController.addon.fileVersion}}
+			<span class="md-headlines">{{ vm.addon.name }}
+				<span class="md-subhead"> by {{vm.addon.author}} - {{vm.addon.fileVersion}}
 					
 				</span>
 			</span>
 
 			<span class="md-body-1">
-				<md-button data-ng-click="openWebsite(browseController.addon);" class="md-icon-button" aria-label="github">
-					<img ng-src="{{ browseController.photo.github }}" ng-style="photo.style" alt="github">
+				<md-button data-ng-click="openWebsite(vm.addon);" class="md-icon-button" aria-label="github">
+					<img ng-src="{{ photo.github }}" ng-style="photo.style" alt="github">
 				</md-button>
-				<md-button  data-ng-show="browseController.addon.existTwitterAccount" class="md-icon-button" data-ng-click="openTwitter(browseController.addon);" aria-label="twitter">
-					 <img ng-src="{{ browseController.photo.twitter }}" ng-style="photo.style" alt="twitter">
+				<md-button  data-ng-show="vm.addon.existTwitterAccount" class="md-icon-button" data-ng-click="openTwitter(vm.addon);" aria-label="twitter">
+					 <img ng-src="{{ photo.twitter }}" ng-style="photo.style" alt="twitter">
 				</md-button>
 
 			</span>
 
-			<span class="md-body-1" data-ng-show="browseController.addon.isInstalled">Installed version: {{browseController.addon.installedFileVersion}}</span>
+			<span class="md-body-1" data-ng-show="vm.addon.isInstalled">Installed version: {{vm.addon.installedFileVersion}}</span>
 			<span class="md-body-1">
 
 
-				<md-button data-ng-click="install(browseController.addon);" aria-label="download" class="md-icon-button md-primary" data-ng-class="{'md-warn': browseController.addon.failedInstall}" data-ng-show="!browseController.addon.isDownloading && !browseController.addon.isInstalled">
+				<md-button data-ng-click="install(vm.addon);" aria-label="download" class="md-icon-button md-primary" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled">
 					<md-tooltip md-direction="bottom">
 						{{ 'ADDONS.INSTALL' | translate }}
 					</md-tooltip>
-					<img ng-src="{{ browseController.buttons.download }}" ng-style="buttons.style" alt="download">
+					<img ng-src="{{ buttons.download }}" ng-style="buttons.style" alt="download">
 				</md-button>
-				<md-button data-ng-click="update(browseController.addon);" class="md-icon-button md-primary" data-ng-show="browseController.addon.isUpdateAvailable && browseController.addon.isInstalled">
+				<md-button data-ng-click="update(vm.addon);" class="md-icon-button md-primary" data-ng-show="vm.addon.isUpdateAvailable && vm.addon.isInstalled">
 					<md-tooltip md-direction="bottom">
 						{{ 'ADDONS.UPDATE' | translate }}
 					</md-tooltip>
-					<img ng-src="{{ browseController.buttons.update }}" ng-style="buttons.style" alt="uninstall">
+					<img ng-src="{{ buttons.update }}" ng-style="buttons.style" alt="uninstall">
 				</md-button>
-				<md-button data-ng-click="uninstall(browseController.addon);" class="md-icon-button md-primary" aria-label="uninstall" data-ng-show="browseController.addon.isInstalled && !browseController.addon.failedInstall">
+				<md-button data-ng-click="uninstall(vm.addon);" class="md-icon-button md-primary" aria-label="uninstall" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">
 					<md-tooltip md-direction="bottom">
 						{{ 'ADDONS.UNINSTALL' | translate }}
 					</md-tooltip>
-					<img ng-src="{{ browseController.buttons.uninstall }}" ng-style="buttons.style" alt="uninstall">
+					<img ng-src="{{ buttons.uninstall }}" ng-style="buttons.style" alt="uninstall">
 				</md-button>
-				<md-progress-circular md-mode="indeterminate" data-ng-show="browseController.addon.isDownloading"></md-progress-circular
+				<md-progress-circular md-mode="indeterminate" data-ng-show="vm.addon.isDownloading"></md-progress-circular
 
 
 			</span>
 			<md-divider></md-divider>
-			<p class="md-body-1"  data-ng-show="browseController.addon.isShowThisDescription(false)">{{(browseController.addon.description)}}</p>
+			<p class="md-body-1"  data-ng-show="vm.addon.isShowThisDescription(false)">{{(vm.addon.description)}}</p>
 			
-			<div class="md-body-1" data-ng-repeat="(lang , description) in browseController.addon.transDesc">
-				<p  data-ng-show="browseController.addon.isShowThisDescription(lang)">{{description}}</p>
+			<div class="md-body-1" data-ng-repeat="(lang , description) in vm.addon.transDesc">
+				<p  data-ng-show="vm.addon.isShowThisDescription(lang)">{{description}}</p>
 			</div>
 			<md-divider></md-divider>
-			<span data-ng-show="browseController.addon.failedInstall"><p class="error">Failed to install browseController.addon. Please contact <a href data-ng-click="openIssues(browseController.addon);">{{browseController.addon.author}}</a>.</p></span>
-			<span data-ng-show="browseController.addon.uninstallError"><p class="error">Could not uninstall browseController.addon. Make sure the game is closed and then try again.</p></span>
-			<p ng-bind-html="browseController.addon.readme" class ="markdown-body"></p>
+			<span data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install vm.addon. Please contact <a href data-ng-click="openIssues(vm.addon);">{{vm.addon.author}}</a>.</p></span>
+			<span data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall vm.addon. Make sure the game is closed and then try again.</p></span>
+			<p ng-bind-html="vm.addon.readme" class ="markdown-body"></p>
 		</md-card-title-text>
 	</md-card-title>
 </md-card>

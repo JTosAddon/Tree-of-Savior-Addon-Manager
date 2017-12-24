@@ -3,15 +3,15 @@
 
 	angular
 		.module('app')
-		.directive('addon', addon);
+		.directive('detailaddon', addon);
 
 	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings, $translate) {
 		var directive = {
 			scope: {},
 			restrict: 'E',
 			link: link,
-			templateUrl: 'views/addon_small.html',
-			controller: AddonController,
+			templateUrl: 'views/browseBig.html',
+			controller: detailAddonController,
 			controllerAs: "vm",
 			bindToController: {
 				addon: '='
@@ -22,7 +22,6 @@
 
 
 		return directive;
-
 		function link(scope, element, attrs) {
 
 			scope.buttons = {
@@ -31,6 +30,7 @@
 				uninstall: 'img/uninstall.png',
 				update: 'img/update.png',
 				notification: 'img/notification.png',
+                back:"img/back.png",
 				style: {
 					width: '32px',
 					height: '32px'
@@ -68,9 +68,11 @@
 			}
 
 			scope.openWebsite = function(addon) {
+                console.log(addon)
+                console.log(scope)
 				// TODO: this needs to be a utility method
 				var repoUrl = "https://github.com/" + addon.repo;
-				require('electron').shell.openExternal(repoUrl);
+				// require('electron').shell.openExternal(repoUrl);
 			}
 
 			scope.openIssues = function(addon) {
@@ -82,35 +84,6 @@
 				require('electron').shell.openExternal(twitterUrl);
 			}
 
-			scope.openReadme = function(addon) {
-				if(addon.isLoadedReadme){
-					addon.isShowReadme = true
-					return;
-				}
-				$log.info("Opening readme");
-				readmeretriever.getReadme(addon, function(success, readme) {
-					if(success) {
-						// var marked = require('marked');
-						marked.setOptions({
-							sanitize: true
-						});
-						scope.$apply(function() {
-							var close = 
-							addon.readme = $sce.trustAsHtml(marked(readme));
-							console.log("readme: " + addon.readme);
-							addon.isShowReadme = true
-							addon.isLoadedReadme = true
-					});
-					}
-				});
-			}
-			scope.closeReadme = function(addon){
-				$log.info("Closing readme");
-				addon.isShowReadme = false
-				$location.hash(addon.name);
-				$anchorScroll();		
-			}
-			
 			scope.getDescription = addon =>{
 				if(!settings.doesTransDesc || !addon.transDesc)
 					return addon.description
@@ -144,31 +117,30 @@
 				}
 			};
 
+			scope.changeToBig = function(addon)
+			{
+				$location.url('/browseBig');
+				$location.selectedAddon = addon;
+			}
+
+            scope.goBack = ()=>{
+                let browseController = scope.$parent.browseController
+                browseController.addon = {}
+                browseController.isShowDetail = false
+				browseController.isLoadedReadme = false
+            }
+
 			scope.doesTranslateDescription = ()=>{return settings.doesTransDesc}
 		}
 	}
 
-	AddonController.$inject = ['$scope',"readmeretriever","$sce"];
+	detailAddonController.$inject = ['$scope'];
 
-	function AddonController($scope,readmeretriever,$sce) {
-		let browseController = $scope.$parent.$parent.browseController
-		$scope.changeToBig = function(addon) {
-			console.log('show detail '+addon.name)
-			browseController.addon = addon
-			browseController.isShowDetail = true
-			if(!addon.readme)
-				readmeretriever.getReadme(addon, function(success, readme) {
-					if(success) {
-						console.log(readme)
-						var marked = require('marked');
-						marked.setOptions({
-							sanitize: true
-						});
-						readme = $sce.trustAsHtml(marked(readme));
-						addon.readme = readme
-						$scope.$parent.$parent.$apply()
-					}
-				});
+	function detailAddonController($scope) {
+        var vm = this
+		$scope.testFunction = function() {
+            console.log(this)
+			console.log("test function");
 		}
 	}
 })();
