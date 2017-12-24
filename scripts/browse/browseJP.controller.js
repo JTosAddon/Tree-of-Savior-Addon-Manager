@@ -7,24 +7,16 @@
 
 	BrowseControllerJP.$inject = [
     '$scope', '$http', 'addonretrieverJP', 'installer','settings', '$log',
-    'SharedScopes', '$translate'
+    '$translate'
   ];
 
 	function BrowseControllerJP(
     $scope, $http, addonretriever,installer, settings, $log,
-    SharedScopes, $translate
+     $translate
   ) {
 		let vm = this;
-		this.sort ="name"
-
-		require('electron-json-storage').get('settingCol', function(error, col) {
-			console.log(col)
-		    vm.col = col
-            if(typeof col == 'object' )
-                vm.col = 50
-        });
-
-        this.addonsLoading = true;
+		vm.sort ="name"
+        vm.addonsLoading = true;
 
 		addonretriever.getAddons(function(addons, addonList) {
 			vm.addons = addons;
@@ -35,12 +27,6 @@
 		addonretriever.getDependencies(function(dependencies) {
 			$log.info(JSON.stringify(dependencies));
 		});
-	
-		this.changeCol = ()=>{
-			require('electron-json-storage').set('settingCol',vm.col, error =>{
-				console.log(error)
-			})
-		}
 		
 		$scope.updateAllAddons = function(){
 			let updatelist = '';

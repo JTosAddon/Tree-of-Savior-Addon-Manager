@@ -68,11 +68,9 @@
 			}
 
 			scope.openWebsite = function(addon) {
-                console.log(addon)
-                console.log(scope)
 				// TODO: this needs to be a utility method
 				var repoUrl = "https://github.com/" + addon.repo;
-				// require('electron').shell.openExternal(repoUrl);
+				require('electron').shell.openExternal(repoUrl);
 			}
 
 			scope.openIssues = function(addon) {
@@ -117,17 +115,12 @@
 				}
 			};
 
-			scope.changeToBig = function(addon)
-			{
-				$location.url('/browseBig');
-				$location.selectedAddon = addon;
-			}
-
-            scope.goBack = ()=>{
+            scope.goBack = (addon)=>{
                 let browseController = scope.$parent.browseController
-                browseController.addon = {}
                 browseController.isShowDetail = false
-				browseController.isLoadedReadme = false
+				$location.hash(addon.name);
+				$anchorScroll();		
+                browseController.addon = {}
             }
 
 			scope.doesTranslateDescription = ()=>{return settings.doesTransDesc}
@@ -135,11 +128,10 @@
 	}
 
 	detailAddonController.$inject = ['$scope'];
-
+1
 	function detailAddonController($scope) {
         var vm = this
 		$scope.testFunction = function() {
-            console.log(this)
 			console.log("test function");
 		}
 	}

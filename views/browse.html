@@ -1,5 +1,4 @@
 <div layout="column" layout-padding>
-<md-button ng-click="testFunction()">hoge</md-button>
 <div data-ng-show="!browseController.isShowDetail">
 	<md-card style="height:65px" md-whiteframe="3">
 		<md-input-container  class="md-block">
@@ -31,14 +30,6 @@
 				<md-radio-button data-ng-value="'author'">{{ 'BROWSE.SORT_BY_DEVELOPER_NAME' | translate }}</md-radio-button>
 			</md-radio-group>
 		</div>
-		<!--<div layout="row">
-			<md-radio-group layout="row" ng-model="browseController.col"  ng-change="browseController.changeCol()">
-				<md-radio-button data-ng-value="'100'">1</md-radio-button>
-				<md-radio-button data-ng-value="'50'">2</md-radio-button>
-				<md-radio-button data-ng-value="'33'">3</md-radio-button>
-				<md-radio-button data-ng-value="'25'">4</md-radio-button>
-			</md-radio-group>
-		</div>-->
 	</md-card>
 
 	<div layout="row" data-ng-show="browseController.addonsLoading" layout-sm="column" layout-align="center center" aria-label="wait" style="height:70px;">

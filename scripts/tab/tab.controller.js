@@ -6,13 +6,13 @@
 		.controller('TabController', TabController);
 
 	TabController.$inject = [
-    '$scope', '$location',  '$anchorScroll', 'settings', '$state', 'SharedScopes',
+    '$scope', '$location',  '$anchorScroll', 'settings', '$state',
     '$translate' , '$http'
   ];
 
 	/* @ngInject */
 	function TabController(
-    $scope, $location, $anchorScroll, settings, $state, SharedScopes,
+    $scope, $location, $anchorScroll, settings, $state,
     $translate , $http
   ) {
 		var vm = this;
