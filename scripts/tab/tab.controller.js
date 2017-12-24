@@ -87,6 +87,5 @@
 		$scope.reloadRoute = function() {
 			$state.reload();
 		};
-		// SharedScopes.setScope('TabController', $scope);
 	}
 })();

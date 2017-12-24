@@ -10,7 +10,7 @@
 			scope: {},
 			restrict: 'E',
 			link: link,
-			templateUrl: 'views/browseBig.html',
+			templateUrl: 'views/addonDetail.html',
 			controller: detailAddonController,
 			controllerAs: "vm",
 			bindToController: {
