@@ -55,3 +55,7 @@ md-card {
 	height: auto;
 	float:left;
 }
+
+.pre-line {
+    white-space: pre-line;
+}

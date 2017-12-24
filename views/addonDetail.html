@@ -49,9 +49,9 @@
 
 			</span>
 			<md-divider></md-divider>
-			<p class="md-body-1"  data-ng-show="vm.addon.isShowThisDescription(false)">{{(vm.addon.description)}}</p>
+			<p class="md-body-1 pre-line"  data-ng-show="vm.addon.isShowThisDescription(false)">{{(vm.addon.description)}}</p>
 			
-			<div class="md-body-1" data-ng-repeat="(lang , description) in vm.addon.transDesc">
+			<div class="md-body-1 pre-line" data-ng-repeat="(lang , description) in vm.addon.transDesc">
 				<p  data-ng-show="vm.addon.isShowThisDescription(lang)">{{description}}</p>
 			</div>
 			<md-divider></md-divider>

@@ -4,14 +4,14 @@
 			<span class="md-headlines" style="display:inline-block;position:relative;">
 				<span class="md-headlines" style="float:left;">
 					<md-tooltip md-direction="bottom">
-						<div ng-bind-html="vm.addon.nameSce"></div>
+						<div class="pre-line">{{vm.addon.name}}</div>
 						<div class="md-body-2" style="color:rgb(180,180,180);">Tags:
 							<div data-ng-repeat="tag in vm.addon.tags" style="display:inline-block;">
 								<div ng-if="$last">{{tag}}</div><div ng-if="!$last">{{tag}},&nbsp;</div>
 							</div>
 						</div>
-						<div ng-show="vm.addon.isShowThisDescription(lang)" class="md-body-2" ng-bind-html="vm.addon.descriptionSce"><br/></div>
-						<div data-ng-show="vm.addon.isShowThisDescription(lang)" class="md-body-2" data-ng-repeat="(lang , description) in vm.addon.transDesc track by $index">
+						<div ng-show="vm.addon.isShowThisDescription(lang)" class="md-body-2 pre-line"><br/>{{vm.addon.description}}</div>
+						<div data-ng-show="vm.addon.isShowThisDescription(lang)" class="md-body-2 pre-line" data-ng-repeat="(lang , description) in vm.addon.transDesc track by $index">
 							{{description}}
 						</div>
 					</md-tooltip>
@@ -39,10 +39,9 @@
 
 			</span>
 			<span class="md-body-1">
-
 				Last Update: {{vm.addon.dateParsed}} 
-				<span class="md-body-1" data-ng-show="vm.addon.isInstalled">Installed version: {{vm.addon.installedFileVersion}}</span>
 			</span>
+				<span class="md-body-1" data-ng-show="vm.addon.isInstalled">Installed version: {{vm.addon.installedFileVersion}}</span>
 			<span class="md-body-1">
 				<md-button data-ng-click="openWebsite(vm.addon);" style="float:left;" class="md-icon-button" aria-label="github">
 					<img ng-src="{{ photo.github }}" ng-style="photo.style" alt="github">
