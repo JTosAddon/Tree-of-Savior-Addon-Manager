@@ -10,7 +10,7 @@ Tree of Savior Addon Manager is an application that allows you to easily find an
 
 If you have previous addons installed from before using this, it's best to delete them all and start from scratch using this app. This includes the `addons` folder and all of the previous ipfs (including `SumAni.ipf`!). No more loaders needed. If you are still using @fiote's addons, you'll still need the old `SumAni.ipf` as it's a dependency for it and those aren't finished being converted yet.
 
-Grab the [latest release](https://github.com/JToSAddon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
+Grab the [latest release](https://github.com/MizukiBelhi/Tree-of-Savior-Addon-Manager/releases), extract it, and run `Tree of Savior Addon Manager.exe`.
 
 # FAQ
 
@@ -115,3 +115,8 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 ## JToS
 
 Make a pull request to [JToSAddon/Addons](https://github.com/JToSAddon/Addons) in order to update `managers.json` to point to your addon repository.
+
+
+## Issues
+
+If there are issues with the manager please open up a [issue](https://github.com/MizukiBelhi/Tree-of-Savior-Addon-Manager/issues) and send in your `addons.json` which is located at `%AppData%\tree-of-savior-addon-manager`.
