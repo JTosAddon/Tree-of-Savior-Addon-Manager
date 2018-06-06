@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/j8j7a610esxw4y5l/branch/master?svg=true)](https://ci.appveyor.com/project/zak1ck/tree-of-savior-addon-manager)
+[![Build status](https://ci.appveyor.com/api/projects/status/35usvf1vxx8vh7ld?svg=true)](https://ci.appveyor.com/project/MizukiBelhi/tree-of-savior-addon-manager)
 
 # Tree of Savior Addon Manager
 
