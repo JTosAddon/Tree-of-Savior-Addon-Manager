@@ -50,7 +50,7 @@
 									addon.author = repoValues[0];
 									addon.repo = repoValues[1];
 
-									$log.info("Loading addon " + addon.name + " by " + addon.author);
+									//$log.info("Loading addon " + addon.name + " by " + addon.author);
 
 									addon.shortname = addon.name;
 									addon.nameSce = $sce.trustAsHtml(addon.name);
@@ -59,7 +59,7 @@
 									}
 
 									addon.twitterAccount = source.twitter
-									$log.info(source.twitter);
+									//$log.info(source.twitter);
 
 									if (addon.twitterAccount) 
 										addon.existTwitterAccount = true
@@ -80,9 +80,12 @@
 									addon.isDownloading = false;
 
 									if(installedAddons) {
+										//console.log("Found installed");
 										var installedAddon = installedAddons[addon.file];
 
+
 										if(installedAddon) {
+											console.log("Found installed addon: "+addon.file);
 											addon.installedAddon = installedAddon;
 											addon.isInstalled = true;
 											var semver = require('semver');
@@ -139,7 +142,7 @@
 												}
 												settings.saveTranslateDescription()
 											} else {
-											console.log('error: '+ response.statusCode);
+												//console.log('error: '+ response.statusCode);
 											}
 										})
 									}
@@ -205,7 +208,7 @@
 							}
 							idx++;
 						});
-						$log.info("finished");
+						//$log.info("finished");
 
 						angular.forEach(addons, function(addon){
 							var hasInstalled = false;

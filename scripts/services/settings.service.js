@@ -100,6 +100,33 @@
 		}
 
 		function getInstalledAddons(callback) {
+			return getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
+				var treeOfSaviorDataDirectory = treeOfSaviorDirectory + "/data/";
+				const fs = require('fs');
+
+				var addonData = [];
+
+
+				fs.readdirSync(treeOfSaviorDataDirectory).forEach(file => {
+					if(file.charAt(0) == "_") //addons installed with the manager start with _
+					{
+						var filen = file.substr(1, file.length-4); //also removing .ipf
+						var filesplit = filen.split("-");
+
+						//this is all we can gather from the file
+						addonData[filesplit[0]] = {};
+						addonData[filesplit[0]]["file"] = filesplit[0];
+						addonData[filesplit[0]]["extension"] = "ipf";
+						addonData[filesplit[0]]["unicode"] = filesplit[1];
+						addonData[filesplit[0]]["fileVersion"] = filesplit[2];
+						addonData[filesplit[0]]["isInstalled"] = true;
+						addonData[filesplit[0]]["installedFileVersion"] = filesplit[2];
+					}
+					//console.log(addonData);
+					return callback(addonData);
+				});
+			});
+
 			return storage.get(addonsFile, function(error, data) {
 				if(error) {
 					$log.error("Could not get installed addons: " + error);
