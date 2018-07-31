@@ -40,6 +40,7 @@
 				twitter: 'img/twitter.png',
 				github : 'img/GitHub-Mark-64px.png',
 				dropdn : 'img/dropdown-arrow-down.png',
+				report : 'img/report.png',
 				style: {
 					width: '16px',
 					height: '16px'
@@ -79,6 +80,13 @@
 			}
 			scope.openTwitter = function(addon) {
 				var twitterUrl = "https://twitter.com/" + addon.twitterAccount;
+				require('electron').shell.openExternal(twitterUrl);
+			}
+			scope.createIssue = function(addon) {
+				//Fixme: Needs "are you sure" question.
+				var title = "Broken-Addon Report: " + addon.name;
+				var body = "Version: " + addon.fileVersion + "\n Author: " + addon.author + "\n";
+				var issueURL = "https://github.com/MizukiBelhi/Addons/issues/new?title=" + title + "&body=" + body;
 				require('electron').shell.openExternal(twitterUrl);
 			}
 

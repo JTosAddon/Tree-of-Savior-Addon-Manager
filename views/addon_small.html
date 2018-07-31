@@ -50,6 +50,9 @@
 				<md-button  data-ng-show="vm.addon.existTwitterAccount" style="float:left;" class="md-icon-button" data-ng-click="openTwitter(vm.addon);" aria-label="twitter">
 					 <img ng-src="{{ photo.twitter }}" ng-style="photo.style" alt="twitter">
 				</md-button>
+				<md-button ng-show="!vm.addon.isBroken" data-ng-click="createIssue(vm.addon);" style="float:left;" class="md-icon-button" aria-label="brokenaddon">
+					<img ng-src="{{ photo.report }}" ng-style="photo.style" alt="brokenaddon">
+				</md-button>
 				<span ng-show="vm.addon.isOutdated" style="float:left;">
 					<md-tooltip md-direction="bottom">
 						This addon is outdated and might not be working correctly.<br/>
