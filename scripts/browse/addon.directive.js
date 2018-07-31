@@ -87,7 +87,7 @@
 				var title = "Broken-Addon Report: " + addon.name;
 				var body = "Version: " + addon.fileVersion + "\n Author: " + addon.author + "\n";
 				var issueURL = "https://github.com/MizukiBelhi/Addons/issues/new?title=" + title + "&body=" + body;
-				require('electron').shell.openExternal(twitterUrl);
+				require('electron').shell.openExternal(issueURL);
 			}
 
 			scope.openReadme = function(addon) {
