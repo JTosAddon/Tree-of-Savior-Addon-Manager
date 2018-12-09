@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Tree of Savior Addon Manager</title>
 
-		<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
+		<link rel="stylesheet" href="./node_modules/angular-material/angular-material.css" />
 		<link rel="stylesheet" href="./css/main.css" />
 		<link rel="stylesheet" href="./css/github-markdown.css" />
 
@@ -20,7 +20,6 @@
 						<md-tab label="{{ 'TAB.ITOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="{{ 'TAB.JTOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
-					<h1 data-ng-show="vm.isFirstLoad" style="color:red">Please Reboot Addon Manager</h1>
 					<div id="content" ui-view flex></div>
 				</div>
 			</div>
@@ -54,20 +53,20 @@
 			</div>
 		</div>
 
-		<script src="./bower_components/angular/angular.min.js"></script>
-		<script src="./bower_components/angular-animate/angular-animate.min.js"></script>
-		<script src="./bower_components/angular-aria/angular-aria.min.js"></script>
-		<script src="./bower_components/angular-messages/angular-messages.min.js"></script>
-		<script src="./bower_components/angular-material/angular-material.min.js"></script>
-		<script src="./bower_components/angular-cookies/angular-cookies.min.js"></script>
-		<script src="./bower_components/angular-translate/angular-translate.min.js"></script>
-		<script src="./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
-		<script src="./bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
-		<script src="./bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
-		<script src="./bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
+		<script src="./node_modules/angular/angular.min.js"></script>
+		<script src="./node_modules/angular-animate/angular-animate.min.js"></script>
+		<script src="./node_modules/angular-aria/angular-aria.min.js"></script>
+		<script src="./node_modules/angular-messages/angular-messages.min.js"></script>
+		<script src="./node_modules/angular-material/angular-material.min.js"></script>
+		<script src="./node_modules/angular-cookies/angular-cookies.min.js"></script>
+		<script src="./node_modules/angular-translate/dist/angular-translate.min.js"></script>
+		<script src="./node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+		<script src="./node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+		<script src="./node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+		<script src="./node_modules/angular-translate/dist/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
 
-		<script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-		<script src="./bower_components/angular-resource/angular-resource.js"></script>
+		<script src="./node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="./node_modules/angular-resource/angular-resource.js"></script>
 
 		<script src="./scripts/app.js"></script>
 		<script src="./scripts/tab/tab.controller.js"></script>
