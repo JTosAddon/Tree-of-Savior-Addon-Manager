@@ -62,6 +62,7 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 ```json
 [
 	{
+		"tosversion" : "20171227",
 		"name" : "Experience Viewer",
 		"file" : "experienceviewer",
 		"extension" : "ipf",
@@ -75,6 +76,7 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 		]
 	},
 	{
+		"tosversion" : "20171227",
 		"name" : "Map Fog Viewer",
 		"file" : "mapfogviewer",
 		"extension" : "ipf",
@@ -91,6 +93,8 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 	}
 ]
 ```
+
+`tosversion`: Date when you release your addon. Format: yearmonthday. Must be the same as the one in [broken-addons.json](https://github.com/MizukiBelhi/Addons/blob/master/broken-addons.json) or newer. Can be left out when you don't want date check to occur.
 
 `name`: The name of your addon. This can be anything you want.
 
