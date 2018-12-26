@@ -1,16 +1,16 @@
 <div layout="column" layout-padding>
 <div data-ng-show="!browseController.isShowDetail">
-	<md-card style="height:65px" md-whiteframe="3">
+	<md-content class="md-whiteframe-3dp" style="height: 65px; overflow: hidden; margin-bottom: 15px;">
 		<md-input-container  class="md-block">
 			<label><img id="search" src="img/search.png"  alt="search">{{ 'BROWSE.SEARCH' | translate }}</label>
 			<input data-ng-model="browseController.searchQuery">
 		</md-input-container>
-	</md-card>
-	
-	<md-card	md-whiteframe="3">
+	</md-content>
+
+	<md-content class="md-whiteframe-3dp" style="padding: 5px; margin-bottom: 10px;">
 		<div layout="row"　layout-align=" center">
 			<md-radio-group layout="row" ng-model="browseController.isInstalled">
-				<md-radio-button data-ng-value="undefined" class="md-primary">{{ 'BROWSE.ALL' | translate}}</md-radio-button>
+				<md-radio-button data-ng-value="" class="md-primary">{{ 'BROWSE.ALL' | translate}}</md-radio-button>
 				<md-radio-button data-ng-value="true">{{ 'BROWSE.INSTALLED' | translate }}</md-radio-button>
 				<md-radio-button data-ng-value="false">{{ 'BROWSE.UNINSTALLED' | translate }}</md-radio-button>
 			</md-radio-group>
@@ -30,7 +30,7 @@
 				<md-radio-button data-ng-value="'author'">{{ 'BROWSE.SORT_BY_DEVELOPER_NAME' | translate }}</md-radio-button>
 			</md-radio-group>
 		</div>
-	</md-card>
+	</md-content>
 
 	<div layout="row" data-ng-show="browseController.addonsLoading" layout-sm="column" layout-align="center center" aria-label="wait" style="height:70px;">
 		<md-progress-circular md-mode="indeterminate" data-ng-show="browseController.addonsLoading"></md-progress-circular>
@@ -38,7 +38,7 @@
 	<div layout="row" layout-wrap >
 		<div flex="50" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter: browseController.searchQuery">
 			<addon addon="addon" ></addon>
-		</div>	
+		</div>
 
 	</div>
 </div>

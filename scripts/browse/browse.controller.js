@@ -31,11 +31,11 @@
 
 		$scope.updateAllAddons = function(){
 			let updatelist = '';
-			for(let i = 0;i<vm.addons.length - 1;i++){
+			for(const i = 0;i<vm.addons.length - 1;i++){
 				let addon = vm.addons[i]
 				if(addon.isUpdateAvailable){
 					installer.update(vm.addons[i])
-					updatelist += addon.name + '\n';			
+					updatelist += addon.name + '\n';
 				}
 			}
 

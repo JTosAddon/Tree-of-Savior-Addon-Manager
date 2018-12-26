@@ -68,10 +68,10 @@
 
 	function getAddonsDate($http,vm,sourceUrl,setting){
 		setting.date = {}
-		$http.get(sourceUrl + "?" + new Date().toString(), {cache: false}).success(function(data) {
-			setting.data = data;
-			vm.latestVersion =  data.version || vm.latestVersion
-			angular.forEach(data.sources, function(source) {
+		$http.get(sourceUrl + "?" + Date.now(), {cache: false}).then(function(res) {
+			setting.data = res.data;
+			vm.latestVersion =  setting.data.version || vm.latestVersion
+			angular.forEach(setting.data.sources, function(source) {
 				_getAddonsDate($http,vm,setting,source,'')
 			});
 			setting.isLoad = true;
@@ -79,8 +79,8 @@
 	}
 	function _getAddonsDate($http,vm,setting,source,nextPageUrl){
 		var url = `https://github.com/${source.repo}/releases.atom` + nextPageUrl
-		$http.get(url).success(function(sourceData) {
-			parser.parseString(sourceData, function (err, result) {
+		$http.get(url).then(function(res) {
+			parser.parseString(res.data, function (err, result) {
 				var entry = result.feed.entry
 				for (var i in entry){
 					var  date = entry[i].updated[0].replace(/T.*/,"").split(/-/)

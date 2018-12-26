@@ -42,11 +42,11 @@
 		function getBrokenAddons($http, service)
 		{
 			var url = "https://raw.githubusercontent.com/MizukiBelhi/Addons/master/broken-addons.json";
-			$http.get(url + "?" + new Date().toString(), {cache: false}).success(function (data){
-				service.TOSVersion = data.tosversion;
+			$http.get(url + "?" + Date.now(), {cache: false}).then(function (res){
+				service.TOSVersion = res.data.tosversion;
 				console.log("ToSVersion: "+service.TOSVersion)
 
-				angular.forEach(data.addons, function(addon){
+				angular.forEach(res.data.addons, function(addon){
 					service.broken_addons.push(addon);
 				});
 			});
@@ -165,7 +165,7 @@
 				} else {
 					$log.info("Wrote does translate description DB: " + settings);
 				}
-			});	
+			});
 		}
 
 		function getIsValidDirectory() {

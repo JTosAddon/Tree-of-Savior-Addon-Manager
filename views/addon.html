@@ -1,0 +1,99 @@
+<md-card class="md-whiteframe-3dp" id="{{vm.addon.name}}" ng-style="vm.addon.isBroken && {'background-color': 'rgba(255,128,0,0.5)'}"  ng-cloak>
+
+  <md-card-header style="padding: 16px 0 0 16px;">
+    <md-card-header-text style="display: flex; flex-direction: row;">
+      <span class="md-headlines" style="font-weight: bold;">
+        {{ vm.addon.shortname }}
+      </span>
+      <span class="md-subhead" style="line-height: initial; margin-left: 10px; font-size: 0.9em;">
+        {{::vm.addon.author}}
+      </span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-title style="padding: 0 0 0 16px; height: 20px;">
+    <md-card-title-text style="flex-direction: row; font-size: 0.9em;">
+      <span class="md-subhead" style="padding-top: 0; font-size: 0.9em">
+        {{vm.addon.fileVersion}} <span style="margin-left: 10px;"> - {{vm.addon.dateParsed}}</span>
+      </span>
+      <span ng-switch="vm.addon.isInstalled" class="md-subhead" style="padding-top: 0; font-size: 0.9em; margin-left: 10px;">
+        <span ng-switch-when="true">Installed: {{ vm.addon.installedFileVersion }}</span>
+        <span ng-switch-default>&nbsp;</span>
+      </span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <md-menu ng-if="getAddonList(vm.addon).length > 1" style="position: relative; top: -30px; left: 45px; height: 1px;">
+    <md-button aria-label="addondropdown" class="md-icon-button" ng-click="openDropdownMenu($mdOpenMenu, $event)">
+      <md-tooltip md-direction="bottom" style="font-size: 14px;">{{::directiveAddonList.length}} versions to select</md-tooltip>
+      <img ng-src="{{ ::photo.dropdn }}" ng-style="photo.style">
+    </md-button>
+    <md-menu-content width="6">
+      <md-menu-item ng-repeat="item in directiveAddonList">
+        <md-button ng-click="selectDropdown( item )">
+          {{::item.name}} - {{::item.fileVersion}}
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+  <md-card-content style="margin-top: 5px; padding: 0 0 0 16px;">
+    <p style="font-size: 0.9em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" ng-switch="vm.addon.isShowThisDescription(lang)">
+      <span ng-switch-when="true" data-ng-repeat="(lang , description) in vm.addon.transDesc track by $index">
+        {{description}}
+      </span>
+      <span ng-switch-default>
+        {{ vm.addon.description}}
+      </span>
+    </p>
+  </md-card-content>
+
+  <md-progress-circular md-mode="indeterminate" md-diameter="32" data-ng-show="vm.addon.isDownloading" style="display: inline; left: 220px; margin-bottom: -32px;"></md-progress-circular>
+
+  <md-card-actions style="display: flex; justify-content: flex-end;">
+      <md-button data-ng-click="openWebsite(vm.addon);" aria-label="github">
+        <img ng-src="{{ photo.github }}" ng-style="photo.style" alt="github">
+      </md-button>
+      <md-button data-ng-if="vm.addon.existTwitterAccount" data-ng-click="openTwitter(vm.addon);" aria-label="twitter">
+         <img ng-src="{{ photo.twitter }}" ng-style="photo.style" alt="twitter">
+      </md-button>
+      <md-button data-ng-click="install(vm.addon);" aria-label="download" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled && !vm.addon.isBroken">
+        <md-tooltip md-direction="bottom" style="font-size: 14px;">
+          {{ 'ADDONS.INSTALL' | translate }}
+        </md-tooltip>
+        <img ng-src="{{ buttons.download }}" ng-style="buttons.style" alt="download">
+      </md-button>
+      <md-button data-ng-click="update(vm.addon);" data-ng-show="vm.addon.isUpdateAvailable && vm.addon.isInstalled && !vm.addon.isBroken">
+        <md-tooltip md-direction="bottom" style="font-size: 14px;">
+          {{ 'ADDONS.UPDATE' | translate }}
+        </md-tooltip>
+        <img ng-src="{{ buttons.update }}" ng-style="buttons.style" alt="uninstall">
+      </md-button>
+      <md-button data-ng-click="uninstall(vm.addon);" aria-label="uninstall" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">
+        <md-tooltip md-direction="bottom" style="font-size: 14px;">
+          {{ 'ADDONS.UNINSTALL' | translate }}
+        </md-tooltip>
+        <img ng-src="{{ buttons.uninstall }}" ng-style="buttons.style" alt="uninstall">
+      </md-button>
+
+      <md-button aria-label="more" data-ng-click="changeToBig(vm.addon);" ng-if="!vm.addon.isBroken" style="margin-left: auto;">
+        <md-tooltip md-direction="bottom" style="font-size: 14px;">
+          More
+        </md-tooltip>
+        <img ng-src="{{ buttons.more }}" ng-style="buttons.style" alt="more">
+      </md-button>
+      <md-button	aria-label="broken" ng-if="vm.addon.isBroken" style="margin-left: auto;">
+        <md-tooltip md-direction="bottom" style="font-size: 14px;">
+          This addon has been reported as broken, and is not available for download.<br/>
+          Please contact the addon author.
+        </md-tooltip>
+        <img ng-src="{{ buttons.notification }}" ng-style="buttons.style" alt="broken">
+      </md-button>
+  </md-card-actions>
+
+  <md-card-footer style="padding: 0">
+    <div style="margin: 5px;" data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href data-ng-click="openIssues(vm.addon);">{{::vm.addon.author}}</a>.</p></div>
+    <div style="margin: 5px;" data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall addon. Make sure the game is closed and then try again.</p></div>
+  </md-card-footer>
+
+</md-card>

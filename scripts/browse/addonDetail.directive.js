@@ -6,7 +6,7 @@
 		.directive('detailaddon', addon);
 
 	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings, $translate) {
-		var directive = {
+		const directive = {
 			scope: {},
 			restrict: 'E',
 			link: link,
@@ -17,8 +17,8 @@
 				addon: '='
 			}
 		};
-		var isShowReadme = false;
-		var isLoadedReadme = false;
+		let isShowReadme = false;
+		let isLoadedReadme = false;
 
 
 		return directive;
@@ -47,7 +47,7 @@
 			};
 
 			scope.install = function(addon) {
-				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
+				const idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				addon.isDownloading = true;
 				installer.install(addon, scope, function() {
 					addon.isDownloading = false;
@@ -55,30 +55,30 @@
 				});
 			}
 			scope.uninstall = function(addon) {
-				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
+				const idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				installer.uninstall(addon, scope);
 				//update the list
 				settings.addonList[addon.similarto].addons[idx] = addon;
 			}
 
 			scope.update = function(addon) {
-				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
+				const idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				installer.update(addon, scope);
 				settings.addonList[addon.similarto].addons[idx] = addon;
 			}
 
 			scope.openWebsite = function(addon) {
 				// TODO: this needs to be a utility method
-				var repoUrl = "https://github.com/" + addon.repo;
+				const repoUrl = "https://github.com/" + addon.repo;
 				require('electron').shell.openExternal(repoUrl);
 			}
 
 			scope.openIssues = function(addon) {
-				var issuesUrl = "https://github.com/" + addon.repo + "/issues";
+				const issuesUrl = "https://github.com/" + addon.repo + "/issues";
 				require('electron').shell.openExternal(issuesUrl);
 			}
 			scope.openTwitter = function(addon) {
-				var twitterUrl = "https://twitter.com/" + addon.twitterAccount;
+				const twitterUrl = "https://twitter.com/" + addon.twitterAccount;
 				require('electron').shell.openExternal(twitterUrl);
 			}
 
@@ -86,7 +86,7 @@
 				if(!settings.doesTransDesc || !addon.transDesc)
 					return addon.description
 				else
-					return addon.transDesc[$translate.proposedLanguage()]	
+					return addon.transDesc[$translate.proposedLanguage()]
 			}
 
 			scope.openDropdownMenu = function($mdOpenMenu, ev)
@@ -105,7 +105,7 @@
 			}
 
 			scope.safeApply = function(fn) {
-				var phase = scope.$root.$$phase;
+				const phase = scope.$root.$$phase;
 				if(phase == '$apply' || phase == '$digest') {
 					if(fn && (typeof(fn) === 'function')) {
 						fn();
@@ -119,7 +119,7 @@
                 let browseController = scope.$parent.browseController
                 browseController.isShowDetail = false
 				$location.hash(addon.name);
-				$anchorScroll();		
+				$anchorScroll();
                 browseController.addon = {}
             }
 
@@ -128,9 +128,9 @@
 	}
 
 	detailAddonController.$inject = ['$scope'];
-1
+
 	function detailAddonController($scope) {
-        var vm = this
+        const vm = this
 		$scope.testFunction = function() {
 			console.log("test function");
 		}

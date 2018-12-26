@@ -13,29 +13,29 @@
 			getAddons : getAddons,
 			getDependencies : getDependencies
 		};
-		var existTwitterAccount = false		
+		var existTwitterAccount = false
 		return service;
 
 		function getAddons(callback) {
 			var JTos = settings.JTos
-			settings.getInstalledAddons(function(installedAddons) {
-				if(!JTos.data){
-					$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
-						JTos.data = data;
-					});
-				}
-				
+			settings.getInstalledAddons(async function(installedAddons) {
+        await new Promise((resolve => {
+          $http.get(masterSources + "?" + Date.now(), {cache: false}).then(function(res) {
+            JTos.data = res.data;
+            resolve()
+          })
+        }))
+
 				var addons = [];
 				var addonList = {};
 				var sameAddons = [];
 				var inList = [];
 				var arr = [];
 				var sourceArr = [];
-				
+
 				angular.forEach(JTos.data.sources, function(source) {
 					var repo = `https://raw.githubusercontent.com/${source.repo}/master/addons.json`;
-
-					arr.push( $http.get(repo + "?" + new Date().toString()).catch(angular.noop) );
+					arr.push( $http.get(repo + "?" + Date.now()).catch(angular.noop) );
 					sourceArr.push(source);
 				});
 
@@ -63,13 +63,13 @@
 								addon.twitterAccount = source.twitter
 								$log.info(source.twitter);
 
-								if (addon.twitterAccount) 
+								if (addon.twitterAccount)
 									addon.existTwitterAccount = true
 
 								if(!addon.tosversion)
 									addon.tosversion = settings.TOSVersion;
 
-								for(var attributeName in source) {
+								for(const attributeName in source) {
 									addon[attributeName] = source[attributeName];
 								}
 
@@ -119,31 +119,29 @@
 								let db = settings.translateDB
 								if(db[addon.name] && (db[addon.name].fileVersion == addon.fileVersion) && Object.keys(db[addon.name].transDesc).length){
 									addon.transDesc = JSON.parse(db[addon.name].transDesc);
-								}else{
-									var request = require('request')
-									request.get({
-										url:"https://antima-bot-lowlier-columbarium.au-syd.mybluemix.net/users/",
-										headers: {
-										"content-type": "text/plane"
-										},
-										qs : {
-										name : addon.name,
-										fileVersion : addon.fileVersion,
-										lang : $translate.proposedLanguage() ||  $translate.preferredLanguage(),
-										repo: source.repo
-										}
-									},function (error, response, body) {
-										if (!error && response.statusCode == 200) {
-											addon.transDesc = body
+								} else {
+                  // requestモジュールでは初回アクセスが異常に遅かったのでangularjsのモジュールに切り替えました
+                  $http.get("https://antima-bot-lowlier-columbarium.au-syd.mybluemix.net/users/", {
+                    headers: {
+                      "content-type": "text/plane"
+                    },
+                    params: {
+  										name : addon.name,
+  										fileVersion : addon.fileVersion,
+  										lang : $translate.proposedLanguage() ||  $translate.preferredLanguage(),
+  										repo: source.repo
+                    },
+                    timeout: 1000
+                  }).then((body) => {
+                  		addon.transDesc = body
 											db[addon.name] = {
 												fileVersion : addon.fileVersion,
 												transDesc : body
 											}
 											settings.saveTranslateDescription()
-										} else {
-										console.log('error: '+ response.statusCode);
-										}
-									})
+                  }).catch((error) => {
+                    // $log.error(error.data);
+                  })
 								}
 								addon.isShowThisDescription = lang =>{
 									if (!settings.doesTransDesc && !lang)
@@ -154,7 +152,7 @@
 								}
 
 
-								
+
 								var doAddSame = false;
 
 								var isPrimitive = typeof sameAddons !== 'object';
@@ -165,7 +163,7 @@
 
 										var substr = addon.name.substring(0, (samead.name.length > addon.name.length ? addon.name.length : samead.name.length+1) );
 										var sim = similarity(samead.name, substr);
-										
+
 										if(sim < 1.0) //if similiraty is not the same
 										{
 											if(sim >= 0.75) //if the similarity is >= 75% we add it to the list
@@ -213,10 +211,10 @@
 
 						angular.forEach(addonList[addon.name].addons, function(addonObj){
 							var addonToCheck = addonObj;
-							
+
 							if(!hasInstalled)
 							{
-								//check for installed addons and swap									
+								//check for installed addons and swap
 								if(addonToCheck.isInstalled && addonToCheck.installedFileVersion == addonToCheck.fileVersion)
 								{
 									//addon gets replaced with addontocheck
@@ -241,7 +239,6 @@
 						});
 
 					});
-
 					callback(addons, addonList);
 				},function(reason) {
 					console.dir(reason);
@@ -252,8 +249,8 @@
 		}
 
 		function getDependencies(callback) {
-			$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
-				return callback(data.dependencies);
+			$http.get(masterSources + "?" + Date.now(), {cache: false}).then(function(res) {
+				return callback(res.data.dependencies);
 			});
 		}
 
@@ -271,7 +268,7 @@
 			return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 		}
 
-		function similarity2(s1, s2){ var split1 = s1.split(' '); var split2 = s2.split(' '); var sum = 0; var max = 0; var temp = 0; for(var i=0; i<split1.length;i++){ max = 0; for(var j=0; j<split2.length;j++){ temp = similarity(split1[i], split2[j]); if(max < temp) max = temp; } sum += max / split1.length; } return sum; };
+		function similarity2(s1, s2){ var split1 = s1.split(' '); var split2 = s2.split(' '); var sum = 0; var max = 0; var temp = 0; for(const i=0; i<split1.length;i++){ max = 0; for(const j=0; j<split2.length;j++){ temp = similarity(split1[i], split2[j]); if(max < temp) max = temp; } sum += max / split1.length; } return sum; };
 
 		function editDistance(s1, s2) {
 			s1 = s1.toLowerCase();

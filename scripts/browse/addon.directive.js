@@ -6,19 +6,19 @@
 		.directive('addon', addon);
 
 	function addon($log, $compile ,installer, settings, $translate) {
-		var directive = {
+		const directive = {
 			scope: {},
 			restrict: 'E',
 			link: link,
-			templateUrl: 'views/addon_small.html',
+			templateUrl: 'views/addon.html',
 			controller: AddonController,
 			controllerAs: "vm",
 			bindToController: {
 				addon: '='
 			}
 		};
-		var isShowReadme = false;
-		var isLoadedReadme = false;
+		let isShowReadme = false;
+		let isLoadedReadme = false;
 
 
 		return directive;
@@ -47,7 +47,7 @@
 			};
 
 			scope.install = function(addon) {
-				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
+				const idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				addon.isDownloading = true;
 				installer.install(addon, scope, function() {
 					addon.isDownloading = false;
@@ -55,38 +55,38 @@
 				});
 			}
 			scope.uninstall = function(addon) {
-				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
+				const idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				installer.uninstall(addon, scope);
 				//update the list
 				settings.addonList[addon.similarto].addons[idx] = addon;
 			}
 
 			scope.update = function(addon) {
-				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
+				const idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				installer.update(addon, scope);
 				settings.addonList[addon.similarto].addons[idx] = addon;
 			}
 
 			scope.openWebsite = function(addon) {
 				// TODO: this needs to be a utility method
-				var repoUrl = "https://github.com/" + addon.repo;
+				const repoUrl = "https://github.com/" + addon.repo;
 				require('electron').shell.openExternal(repoUrl);
 			}
 
 			scope.openIssues = function(addon) {
-				var issuesUrl = "https://github.com/" + addon.repo + "/issues";
+				const issuesUrl = "https://github.com/" + addon.repo + "/issues";
 				require('electron').shell.openExternal(issuesUrl);
 			}
 			scope.openTwitter = function(addon) {
-				var twitterUrl = "https://twitter.com/" + addon.twitterAccount;
+				const twitterUrl = "https://twitter.com/" + addon.twitterAccount;
 				require('electron').shell.openExternal(twitterUrl);
 			}
-					
+
 			scope.getDescription = addon =>{
 				if(!settings.doesTransDesc || !addon.transDesc)
 					return addon.description
 				else
-					return addon.transDesc[$translate.proposedLanguage()]	
+					return addon.transDesc[$translate.proposedLanguage()]
 			}
 
 			scope.openDropdownMenu = function($mdOpenMenu, ev)
@@ -101,11 +101,15 @@
 
 			scope.getAddonList = function(selectedAddon)
 			{
-				return settings.addonList[selectedAddon.similarto].addons;
+        // 複数バージョン表示に都合３回この処理を呼んでいて
+        // なぜか知らないけれども結構遅いのでキャッシュしておくことにします
+        // return settings.addonList[selectedAddon.similarto].addons;
+        scope.directiveAddonList = settings.addonList[selectedAddon.similarto].addons;
+        return scope.directiveAddonList
 			}
 
 			scope.safeApply = function(fn) {
-				var phase = scope.$root.$$phase;
+				const phase = scope.$root.$$phase;
 				if(phase == '$apply' || phase == '$digest') {
 					if(fn && (typeof(fn) === 'function')) {
 						fn();
@@ -131,7 +135,7 @@
 				readmeretriever.getReadme(addon, function(success, readme) {
 					if(success) {
 						console.log(readme)
-						var marked = require('marked');
+						const marked = require('marked');
 						marked.setOptions({
 							sanitize: true
 						});
