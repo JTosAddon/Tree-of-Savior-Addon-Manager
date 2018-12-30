@@ -1,11 +1,11 @@
 {
   "name": "tree-of-savior-addon-manager",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An addon manager for Tree of Savior.",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package": "electron-packager . ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --version=1.4.2 --asar=true --prune=true --icon=resources/tos-exp-256.ico",
+    "package": "electron-packager . ToS.Addon.Manager--%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --asar --prune=true --icon=resources/tos-exp-256.ico",
     "lint": "eslint scripts"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Excrulon/Tree-of-Savior-Addon-Manager#readme",
   "devDependencies": {
     "electron": "^3.0.10",
+    "electron-packager": "^13.0.1",
     "eslint": "^5.9.0"
   },
   "dependencies": {

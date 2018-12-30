@@ -19,12 +19,12 @@
 		function getAddons(callback) {
 			var JTos = settings.JTos
 			settings.getInstalledAddons(async function(installedAddons) {
-        await new Promise((resolve => {
+        await new Promise(resolve => {
           $http.get(masterSources + "?" + Date.now(), {cache: false}).then(function(res) {
             JTos.data = res.data;
             resolve()
           })
-        }))
+        })
 
 				var addons = [];
 				var addonList = {};

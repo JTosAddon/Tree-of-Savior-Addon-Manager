@@ -102,10 +102,25 @@
 			var request = require('request');
 			var fileRequest = request.get(addon.downloadUrl);
 
+      fileRequest.on('error', (err) => {
+        $log.error(err);
+        if (scope) {
+          scope.$apply(() => {
+            addon.isDownloading = false;
+            addon.failedInstall = true;
+            addon.isInstalled = false;
+          });
+        } else {
+          addon.isDownloading = false;
+          addon.failedInstall = true;
+          addon.isInstalled = false;
+        }
+      });
+
 			fileRequest.on('response', function(response) {
 				$log.info(`status code: ${response.statusCode}`);
 				if(response.statusCode !== 200) {
-					if(scope){					
+					if(scope){
 						scope.$apply(function() {
 							addon.isDownloading = false;
 							addon.isInstalled = false;
@@ -114,7 +129,7 @@
 					}else{
 						addon.isDownloading = false;
 						addon.isInstalled = false;
-						addon.failedInstall = true;	
+						addon.failedInstall = true;
 					}
 
 					return;
@@ -156,7 +171,7 @@
 							addon.failedInstall = false;
 							addon.isUpdateAvailable = false;
 							addon.installedFileVersion = addon.fileVersion;
-						}	
+						}
 						file.close();
 						settings.addInstalledAddon(addon);
 
@@ -176,7 +191,7 @@
 						else{
 							addon.isDownloading = false;
 							addon.failedInstall = true;
-							addon.isInstalled = false;	
+							addon.isInstalled = false;
 						}
 						return;
 					});
@@ -219,7 +234,7 @@
 									});
 								} else {
 									$log.error(filename + " does not exist so cannot remove it.");
-									
+
 									settings.removeInstalledAddon(addon);
 									if(scope)
 									scope.$apply(function() {

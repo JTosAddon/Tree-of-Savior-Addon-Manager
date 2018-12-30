@@ -17,9 +17,6 @@
 				addon: '='
 			}
 		};
-		let isShowReadme = false;
-		let isLoadedReadme = false;
-
 
 		return directive;
 
@@ -82,12 +79,20 @@
 				require('electron').shell.openExternal(twitterUrl);
 			}
 
-			scope.getDescription = addon =>{
-				if(!settings.doesTransDesc || !addon.transDesc)
-					return addon.description
-				else
-					return addon.transDesc[$translate.proposedLanguage()]
+			scope.getDescription = addon => {
+        let desc = addon.description;
+				if(settings.doesTransDesc && addon.transDesc) {
+          desc = addon.transDesc[$translate.proposedLanguage()];
+          if (!desc) {
+            desc = addon.description;
+          }
+        }
+        return desc;
 			}
+
+      scope.toggleDescription = addon => {
+        scope.showFullDesc = !scope.showFullDesc;
+      }
 
 			scope.openDropdownMenu = function($mdOpenMenu, ev)
 			{

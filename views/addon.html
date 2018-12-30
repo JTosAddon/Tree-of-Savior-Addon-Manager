@@ -38,12 +38,10 @@
   </md-menu>
 
   <md-card-content style="margin-top: 5px; padding: 0 0 0 16px;">
-    <p style="font-size: 0.9em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" ng-switch="vm.addon.isShowThisDescription(lang)">
-      <span ng-switch-when="true" data-ng-repeat="(lang , description) in vm.addon.transDesc track by $index">
-        {{description}}
-      </span>
-      <span ng-switch-default>
-        {{ vm.addon.description}}
+    <p ng-switch="showFullDesc" data-ng-click="toggleDescription(vm.addon)" style="font-size: 0.9em; outline: 0px solid transparent;">
+      <span ng-switch-when="true" style="white-space: pre-line;">{{ getDescription(vm.addon) }}</span>
+      <span ng-switch-default style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block;">
+        {{ getDescription(vm.addon) }}
       </span>
     </p>
   </md-card-content>
@@ -91,9 +89,9 @@
       </md-button>
   </md-card-actions>
 
-  <md-card-footer style="padding: 0">
-    <div style="margin: 5px;" data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href data-ng-click="openIssues(vm.addon);">{{::vm.addon.author}}</a>.</p></div>
-    <div style="margin: 5px;" data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall addon. Make sure the game is closed and then try again.</p></div>
+  <md-card-footer style="padding: 0; margin-left: 16px;">
+    <div data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href data-ng-click="openIssues(vm.addon);">{{::vm.addon.author}}</a>.</p></div>
+    <div data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall addon. Make sure the game is closed and then try again.</p></div>
   </md-card-footer>
 
 </md-card>
