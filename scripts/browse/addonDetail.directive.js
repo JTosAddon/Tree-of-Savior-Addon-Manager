@@ -3,23 +3,25 @@
 
 	angular
 		.module('app')
-		.directive('addon', addon);
+		.directive('detailaddon', addon);
 
-	function addon($log, $compile ,installer, settings, $translate) {
+	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings, $translate) {
 		const directive = {
 			scope: {},
 			restrict: 'E',
 			link: link,
-			templateUrl: 'views/addon.html',
-			controller: AddonController,
+			templateUrl: 'views/addonDetail.html',
+			controller: detailAddonController,
 			controllerAs: "vm",
 			bindToController: {
 				addon: '='
 			}
 		};
+		let isShowReadme = false;
+		let isLoadedReadme = false;
+
 
 		return directive;
-
 		function link(scope, element, attrs) {
 
 			scope.buttons = {
@@ -28,6 +30,7 @@
 				uninstall: 'img/uninstall.png',
 				update: 'img/update.png',
 				notification: 'img/notification.png',
+                back:"img/back.png",
 				style: {
 					width: '32px',
 					height: '32px'
@@ -79,20 +82,12 @@
 				require('electron').shell.openExternal(twitterUrl);
 			}
 
-			scope.getDescription = addon => {
-        let desc = addon.description;
-				if(settings.doesTransDesc && addon.transDesc) {
-          desc = addon.transDesc[$translate.proposedLanguage()];
-          if (!desc) {
-            desc = addon.description;
-          }
-        }
-        return desc;
+			scope.getDescription = addon =>{
+				if(!settings.doesTransDesc || !addon.transDesc)
+					return addon.description
+				else
+					return addon.transDesc[$translate.proposedLanguage()]
 			}
-
-      scope.toggleDescription = addon => {
-        scope.showFullDesc = !scope.showFullDesc;
-      }
 
 			scope.openDropdownMenu = function($mdOpenMenu, ev)
 			{
@@ -106,11 +101,7 @@
 
 			scope.getAddonList = function(selectedAddon)
 			{
-        // 複数バージョン表示に都合３回この処理を呼んでいて
-        // なぜか知らないけれども結構遅いのでキャッシュしておくことにします
-        // return settings.addonList[selectedAddon.similarto].addons;
-        scope.directiveAddonList = settings.addonList[selectedAddon.similarto].addons;
-        return scope.directiveAddonList
+				return settings.addonList[selectedAddon.similarto].addons;
 			}
 
 			scope.safeApply = function(fn) {
@@ -124,31 +115,24 @@
 				}
 			};
 
+            scope.goBack = (addon)=>{
+                let browseController = scope.$parent.browseController
+                browseController.isShowDetail = false
+				$location.hash(addon.name);
+				$anchorScroll();
+                browseController.addon = {}
+            }
+
 			scope.doesTranslateDescription = ()=>{return settings.doesTransDesc}
 		}
 	}
 
-	AddonController.$inject = ['$scope',"readmeretriever","$sce"];
+	detailAddonController.$inject = ['$scope'];
 
-	function AddonController($scope,readmeretriever,$sce) {
-		let browseController = $scope.$parent.$parent.browseController
-		$scope.changeToBig = function(addon) {
-			console.log('show detail '+addon.name)
-			browseController.addon = addon
-			browseController.isShowDetail = true
-			if(!addon.readme)
-				readmeretriever.getReadme(addon, function(success, readme) {
-					if(success) {
-						console.log(readme)
-						const marked = require('marked');
-						marked.setOptions({
-							sanitize: true
-						});
-						readme = $sce.trustAsHtml(marked(readme));
-						addon.readme = readme
-						$scope.$parent.$parent.$apply()
-					}
-				});
+	function detailAddonController($scope) {
+        const vm = this
+		$scope.testFunction = function() {
+			console.log("test function");
 		}
 	}
 })();

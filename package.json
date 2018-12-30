@@ -1,11 +1,12 @@
 {
   "name": "tree-of-savior-addon-manager",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An addon manager for Tree of Savior.",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package": "electron-packager . ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --version=1.4.2 --asar=true --prune=true --icon=resources/tos-exp-256.ico"
+    "package": "electron-packager . ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --asar --prune=true --icon=resources/tos-exp-256.ico",
+    "lint": "eslint scripts"
   },
   "repository": {
     "type": "git",
@@ -17,21 +18,26 @@
     "manager"
   ],
   "author": "Excrulon",
-  "license": "GNUv2",
+  "license": "GPL-2.0-only",
   "bugs": {
     "url": "https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/issues"
   },
   "homepage": "https://github.com/Excrulon/Tree-of-Savior-Addon-Manager#readme",
   "devDependencies": {
-    "jasmine-core": "^2.4.1",
-    "karma": "^0.13.15",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "phantomjs": "^1.9.19",
-    "electron": "1.4.2"
+    "electron": "^3.0.10",
+    "electron-packager": "^13.0.1",
+    "eslint": "^5.9.0"
   },
   "dependencies": {
+    "angular": "^1.7.5",
+    "angular-animate": "^1.7.5",
+    "angular-aria": "^1.7.5",
+    "angular-cookies": "^1.7.5",
+    "angular-material": "^1.1.10",
+    "angular-messages": "^1.7.5",
+    "angular-resource": "^1.7.5",
+    "angular-translate": "^2.18.1",
+    "angular-ui-router": "^1.0.20",
     "electron-json-storage": "^2.0.0",
     "marked": "^0.3.5",
     "mkdirp": "^0.5.1",
@@ -39,7 +45,7 @@
     "nano": "^6.4.0",
     "request": "^2.81.0",
     "request-progress": "^2.0.1",
-    "semver": "^5.1.0",
+    "semver": "^5.6.0",
     "xml2js": "^0.4.17"
   }
 }

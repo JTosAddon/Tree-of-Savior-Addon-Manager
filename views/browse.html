@@ -1,14 +1,16 @@
 <div layout="column" layout-padding>
-	<md-card style="height:65px" md-whiteframe="3">
+<div data-ng-show="!browseController.isShowDetail">
+	<md-content class="md-whiteframe-3dp" style="height: 65px; overflow: hidden; margin-bottom: 15px;">
 		<md-input-container  class="md-block">
-			<label><img id = "search"src="img/search.png"  alt="search">{{ 'BROWSE.SEARCH' | translate }}</label>
+			<label><img id="search" src="img/search.png"  alt="search">{{ 'BROWSE.SEARCH' | translate }}</label>
 			<input data-ng-model="browseController.searchQuery">
 		</md-input-container>
-	</md-card>
-	<md-card	md-whiteframe="3">
+	</md-content>
+
+	<md-content class="md-whiteframe-3dp" style="padding: 5px; margin-bottom: 10px;">
 		<div layout="row"　layout-align=" center">
 			<md-radio-group layout="row" ng-model="browseController.isInstalled">
-				<md-radio-button data-ng-value="undefined" class="md-primary">{{ 'BROWSE.ALL' | translate}}</md-radio-button>
+				<md-radio-button data-ng-value="" class="md-primary">{{ 'BROWSE.ALL' | translate}}</md-radio-button>
 				<md-radio-button data-ng-value="true">{{ 'BROWSE.INSTALLED' | translate }}</md-radio-button>
 				<md-radio-button data-ng-value="false">{{ 'BROWSE.UNINSTALLED' | translate }}</md-radio-button>
 			</md-radio-group>
@@ -16,7 +18,7 @@
 		<br>
 		<div layout="row">
 			<md-checkbox flex ng-model="browseController.isUpdateAvailable" aria-label="Is update available?">{{ 'BROWSE.SHOW_ONLY_UPDATABLE' | translate }}</md-checkbox>
-			<md-button flex class="md-raised" style="float:left"data-ng-click="updateAllAddons()">{{ 'BROWSE.UPDATE_ALL_ADDONS' | translate }}</md-button>
+			<md-button class="md-raised" style="float:left" data-ng-click="updateAllAddons()">{{ 'BROWSE.UPDATE_ALL_ADDONS' | translate }}</md-button>
 		</div>
 		<br>
 		<div layout="row">
@@ -28,19 +30,18 @@
 				<md-radio-button data-ng-value="'author'">{{ 'BROWSE.SORT_BY_DEVELOPER_NAME' | translate }}</md-radio-button>
 			</md-radio-group>
 		</div>
-		<div layout="row">
-			<md-radio-group layout="row" ng-model="browseController.col"  ng-change="browseController.changeCol()">
-				<md-radio-button data-ng-value="'100'">1</md-radio-button>
-				<md-radio-button data-ng-value="'50'">2</md-radio-button>
-				<md-radio-button data-ng-value="'33'">3</md-radio-button>
-				<md-radio-button data-ng-value="'25'">4</md-radio-button>
-			</md-radio-group>
-		</div>
-	</md-card>
-	<div layout="row" layout-wrap>
-		<div flex="{{browseController.col}}" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter:browseController.searchQuery">
-			<addon addon="addon"></addon>
-		</div>
+	</md-content>
+
+	<div layout="row" data-ng-show="browseController.addonsLoading" layout-sm="column" layout-align="center center" aria-label="wait" style="height:70px;">
+		<md-progress-circular md-mode="indeterminate" data-ng-show="browseController.addonsLoading"></md-progress-circular>
 	</div>
+	<div layout="row" layout-wrap style="overflow-x: hidden;">
+		<div flex="50" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter: browseController.searchQuery">
+			<addon addon="addon" ></addon>
+		</div>
+
+	</div>
+</div>
+	<detailaddon  data-ng-show="browseController.isShowDetail" addon="browseController.addon"></detailaddon>
 </div>
 

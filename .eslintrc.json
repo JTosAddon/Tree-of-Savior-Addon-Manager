@@ -1,0 +1,36 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2016,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "warn",
+            "tab"
+        ],
+        "linebreak-style": [
+            "warn",
+            "windows"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "warn",
+            "always"
+        ]
+    },
+    "globals": {
+      "angular": true
+    }
+}

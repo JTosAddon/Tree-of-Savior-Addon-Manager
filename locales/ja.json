@@ -8,8 +8,7 @@
         "RELOAD": "ページの更新",
         "SCROLL_TO_TOP": "上に戻る",
         "OPEN_OFFICIAL_SITE": "公式サイトへ",
-        "TRANSLATE_DESCRIPTION":"説明を翻訳する"
-
+        "TRANSLATE_DESCRIPTION": "説明を翻訳する"
     },
     "SETTINGS": {
         "NEED_UPDATE": "最新のマネージャーにアップデートしてください",

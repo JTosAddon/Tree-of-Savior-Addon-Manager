@@ -23,8 +23,8 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 	// Create the browser window.
-	mainWindow = new BrowserWindow({width: 1024, height: 768, icon: 'resources/tos-exp.ico'});
-
+	mainWindow = new BrowserWindow({width: 1024+100, height: 768, icon: 'resources/tos-exp.ico'});
+	
 	mainWindow.setMenuBarVisibility(false);
 
 	mainWindow.setTitle("Tree of Savior Addon Manager");
@@ -33,7 +33,7 @@ app.on('ready', function() {
 	mainWindow.loadURL(`file://${__dirname}/index.html`);
 
 	// Open the DevTools.
-	// mainWindow.webContents.openDevTools();
+	//mainWindow.webContents.openDevTools();
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function() {
