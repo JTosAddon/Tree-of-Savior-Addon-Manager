@@ -3,81 +3,74 @@
 
 	angular
 		.module('app')
-		.controller('TabController', TabController);
+		.controller('TabController',
+      ['$location', '$anchorScroll', 'settings', '$state', '$translate', '$http', '$log', '$scope',
+        function($location, $anchorScroll, settings, $state, $translate, $http, $log, $scope) {
+      const vm = this;
 
-	TabController.$inject = [
-    '$scope', '$location',  '$anchorScroll', 'settings', '$state',
-    '$translate' , '$http'
-  ];
+      vm.selectedIndex = 0;
 
-	/* @ngInject */
-	function TabController(
-    $scope, $location, $anchorScroll, settings, $state,
-    $translate , $http
-  ) {
-		var vm = this;
+      $scope.$on('ToSInstallFolderChanged', (e, data) => {
+        $log.debug(e, data)
+        vm.isValidDirectory = data;
+        // これだと状態変化を知るためにものすごい間隔で関数呼び出しされるのでやめたほうが良い
+        // vm.isValidDirectory = function() {
+        //   return settings.getIsValidDirectory();
+        // };
+      });
 
-		vm.selectedIndex = 0;
+      vm.launchGame = function() {
+  			const urlPath = $translate.instant('TOS.SITE_URL');
+  			$log.debug(urlPath);
 
-		vm.isValidDirectory = function() {
-			return settings.getIsValidDirectory();
-		};
+  			require('electron').shell.openExternal(urlPath);
+  		};
 
-		vm.launchGame = function() {
-			const urlPath = $translate.instant('TOS.SITE_URL')
-			console.log(urlPath)
+      vm.selectSettingTab = () => {
+        $location.url('/settings');
+      };
+      vm.selectIToSTab = () => {
+        $location.url('/browse');
+      };
+      vm.selectJToSTab = () => {
+        $location.url('/browseJP');
+      };
 
-			require('electron').shell.openExternal(urlPath);
-		};
+  		vm.jumpTo = function () {
+  			$location.hash('top');
+  			$anchorScroll();
+  		}
 
-		$scope.$watch('vm.selectedIndex', function(current, old) {
-			switch(current) {
-				case 0:
-					$location.url('/settings');
-					break;
+  		vm.showTab = function() {
+  			return (settings.JTos.isLoad && settings.ITos.isLoad);
+  		};
 
-				case 1:
-					$location.url('/browse');
-					break;
+  		vm.openDiscord = function()	{
+  			require('electron').shell.openExternal('https://discord.gg/hgxRFwy');
+  		};
 
-				case 2:
-					$location.url('/browseJP');
-					break;
-			}
-		});
-		vm.jumpTo = function () {
-			$location.hash('top');
-			$anchorScroll();
-		}
-		vm.showTab = function(){
-			return (settings.JTos.isLoad && settings.ITos.isLoad);
-		};
-		vm.openDiscord = function()	{
-			require('electron').shell.openExternal('https://discord.gg/hgxRFwy');
-		};
+  		// get language pack from local
+      // 初回起動でHTTPリクエスト発行するしてやるのは性能的にアレなのでローカルから取得します
+      // 必要なら起動後に別トリガーで（要らないと思うけど...
+      // isFirstLoadも要らなくなるので一緒に消し込んでます。
+  		vm.locales = require('./locales/locales.json');
 
-		// get language pack from local
-    // 初回起動でHTTPリクエスト発行するしてやるのは性能的にアレなのでローカルから取得します
-    // 必要なら起動後に別トリガーで（要らないと思うけど...
-    // isFirstLoadも要らなくなるので一緒に消し込んでます。
-		vm.locales = require('./locales/locales.json')
+  		settings.getTranslateDescription(data => {
+  			vm.doesTransDesc = data.doesTransDesc
+  		})
 
-		settings.getTranslateDescription(data=>{
-			vm.doesTransDesc = data.doesTransDesc
-		})
+  		vm.changeTranslateDescription = () => {
+  			settings.doesTransDesc = vm.doesTransDesc
+  			settings.saveTranslateDescription()
+  		}
 
-		vm.changeTranslateDescription = ()=>{
-			settings.doesTransDesc = vm.doesTransDesc
-			settings.saveTranslateDescription()
-		}
+  		vm.selectedLanguage = $translate.proposedLanguage() || $translate.preferredLanguage();
+  		vm.changeLang = function(lang) {
+  			$translate.use(lang);
+  		};
 
-		vm.selectedLanguage = $translate.proposedLanguage() || $translate.preferredLanguage();
-		vm.changeLang = function(lang) {
-			$translate.use(lang);
-		};
-
-		$scope.reloadRoute = function() {
-			$state.reload();
-		};
-	}
+  		vm.reloadRoute = function() {
+  			$state.reload();
+  		};
+  }]);
 })();

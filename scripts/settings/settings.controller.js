@@ -5,14 +5,14 @@
 		.module('app')
 		.controller('SettingsController', SettingsController);
 
-	SettingsController.$inject = ['$http','settings','$translate'];
+	SettingsController.$inject = ['$http','settings','$translate','$scope'];
 
 	var xml2js = require('xml2js'),
 	    parser = new xml2js.Parser(),
 		moment = require('moment')
 
 	/* @ngInject */
-	function SettingsController($http,settings,$translate) {
+	function SettingsController($http,settings,$translate,$scope) {
 		var vm = this;
 		vm.thisVersion = require('./package.json').version;
 		vm.latestVersion = vm.thisVersion
@@ -57,10 +57,13 @@
 			var exe = vm.treeOfSaviorDirectory + "/release/Client_tos.exe";
 
 			fs.stat(exe, function(error, stat) {
+        const eventName = 'ToSInstallFolderChanged';
 				if(error == null) {
 					settings.setIsValidDirectory(true);
+          $scope.$emit(eventName, true);
 				} else {
 					settings.setIsValidDirectory(false);
+          $scope.$emit(eventName, false);
 				}
 			});
 		}

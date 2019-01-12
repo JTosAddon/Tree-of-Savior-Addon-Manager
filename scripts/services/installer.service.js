@@ -104,74 +104,38 @@
 
       fileRequest.on('error', (err) => {
         $log.error(err);
-        if (scope) {
-          scope.$apply(() => {
-            addon.isDownloading = false;
-            addon.failedInstall = true;
-            addon.isInstalled = false;
-          });
-        } else {
-          addon.isDownloading = false;
-          addon.failedInstall = true;
-          addon.isInstalled = false;
-        }
+        addon.isDownloading = false;
+        addon.failedInstall = true;
+        addon.isInstalled = false;
       });
 
 			fileRequest.on('response', function(response) {
 				$log.info(`status code: ${response.statusCode}`);
 				if(response.statusCode !== 200) {
-					if(scope){
-						scope.$apply(function() {
-							addon.isDownloading = false;
-							addon.isInstalled = false;
-							addon.failedInstall = true;
-						});
-					}else{
-						addon.isDownloading = false;
-						addon.isInstalled = false;
-						addon.failedInstall = true;
-					}
-
+          addon.isDownloading = false;
+          addon.isInstalled = false;
+          addon.failedInstall = true;
 					return;
 				} else {
 					var fs = require('fs');
 					var file = fs.createWriteStream(destinationFile);
 
 					fileRequest.on('error', function(error) {
-						if(scope){
-							scope.$apply(function() {
-								addon.isDownloading = false;
-								addon.failedInstall = true;
-								addon.isInstalled = false;
-							});
-						}else{
-							addon.isDownloading = false;
-							addon.failedInstall = true;
-							addon.isInstalled = false;
-						}
+            addon.isDownloading = false;
+            addon.failedInstall = true;
+            addon.isInstalled = false;
 						fs.unlink(destinationFile);
-
 						return;
 					});
 
 					fileRequest.pipe(file);
 
 					file.on('finish', function() {
-						if(scope){
-							scope.$apply(function() {
-								addon.isDownloading = false;
-								addon.isInstalled = true;
-								addon.failedInstall = false;
-								addon.isUpdateAvailable = false;
-								addon.installedFileVersion = addon.fileVersion;
-							});
-						}else{
-							addon.isDownloading = false;
-							addon.isInstalled = true;
-							addon.failedInstall = false;
-							addon.isUpdateAvailable = false;
-							addon.installedFileVersion = addon.fileVersion;
-						}
+            addon.isDownloading = false;
+            addon.isInstalled = true;
+            addon.failedInstall = false;
+            addon.isUpdateAvailable = false;
+            addon.installedFileVersion = addon.fileVersion;
 						file.close();
 						settings.addInstalledAddon(addon);
 
@@ -182,17 +146,9 @@
 
 					file.on('error', function(error) {
 						fs.unlink(destinationFile);
-						if(scope)
-							scope.$apply(function() {
-								addon.isDownloading = false;
-								addon.failedInstall = true;
-								addon.isInstalled = false;
-							});
-						else{
-							addon.isDownloading = false;
-							addon.failedInstall = true;
-							addon.isInstalled = false;
-						}
+            addon.isDownloading = false;
+            addon.failedInstall = true;
+            addon.isInstalled = false;
 						return;
 					});
 				}
@@ -221,11 +177,8 @@
 										} else {
 											addon.uninstallError = false;
 											settings.removeInstalledAddon(addon);
-											if(scope)
-											scope.$apply(function() {
-												addon.isDownloading = false;
-												addon.isInstalled = false;
-											});
+                      addon.isDownloading = false;
+                      addon.isInstalled = false;
 
 											if(callback) {
 												return callback(true);
@@ -236,11 +189,8 @@
 									$log.error(filename + " does not exist so cannot remove it.");
 
 									settings.removeInstalledAddon(addon);
-									if(scope)
-									scope.$apply(function() {
-										addon.isDownloading = false;
-										addon.isInstalled = false;
-									});
+                  addon.isDownloading = false;
+                  addon.isInstalled = false;
 
 									if(callback) {
 										return callback(true);

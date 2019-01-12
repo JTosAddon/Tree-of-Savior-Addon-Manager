@@ -16,7 +16,13 @@
   ) {
 		let vm = this;
 		vm.sort ="name"
-        vm.addonsLoading = true;
+    vm.addonsLoading = true;
+
+    $scope.$on('ShowAddonDetail', (e, data) => {
+      $log.debug(e, data)
+      vm.addon = data;
+      vm.isShowDetail = true;
+    });
 
 		addonretriever.getAddons(function(addons, addonList) {
 			vm.addons = addons;

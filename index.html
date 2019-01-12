@@ -14,11 +14,10 @@
 			<div id="body">
 				<div id="top" ></div>
 				<div class="content">
-					<md-tabs  md-stretch-tabs md-border-bottom  md-selected="vm.selectedIndex">
-					<!--<md-tabs data-ng-show="vm.showTab()" md-stretch-tabs md-border-bottom  md-selected="vm.selectedIndex">-->
-						<md-tab label="{{ 'TAB.SETTINGS' | translate }}"></md-tab>
-						<md-tab label="{{ 'TAB.ITOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
-						<md-tab label="{{ 'TAB.JTOS' | translate }}" ng-disabled="!vm.isValidDirectory();"></md-tab>
+					<md-tabs  md-stretch-tabs md-border-bottom md-selected="vm.selectedIndex">
+						<md-tab label="{{ 'TAB.SETTINGS' | translate }}" md-on-select="vm.selectSettingTab()"></md-tab>
+						<md-tab label="{{ 'TAB.ITOS' | translate }}" ng-disabled="!vm.isValidDirectory" md-on-select="vm.selectIToSTab()"></md-tab>
+						<md-tab label="{{ 'TAB.JTOS' | translate }}" ng-disabled="!vm.isValidDirectory" md-on-select="vm.selectJToSTab()"></md-tab>
 					</md-tabs>
 					<div id="content" ui-view flex></div>
 				</div>
