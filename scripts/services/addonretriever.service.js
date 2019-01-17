@@ -101,7 +101,7 @@
 												   addon.isUpdateAvailable = false;
 											   	}
 										   	}catch(err) {
-										   		$log.info("semver version error");
+										   		$log.info("update semver version error v: "+installedAddon.fileVersion+" - a: "+addon.fileVersion);
 										   		addon.isUpdateAvailable = false;
 										   	}
 										} else {

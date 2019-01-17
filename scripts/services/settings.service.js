@@ -106,6 +106,8 @@
 
 				var addonData = [];
 
+				var semregex = /\bv?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z-]+(?:\.[\da-z-]+)*)?(?:\+[\da-z-]+(?:\.[\da-z-]+)*)?\b/ig;
+
 
 				fs.readdirSync(treeOfSaviorDataDirectory).forEach(file => {
 					if(file.charAt(0) == "_") //addons installed with the manager start with _
@@ -118,9 +120,9 @@
 						addonData[filesplit[0]]["file"] = filesplit[0];
 						addonData[filesplit[0]]["extension"] = "ipf";
 						addonData[filesplit[0]]["unicode"] = filesplit[1];
-						addonData[filesplit[0]]["fileVersion"] = filesplit[2];
+						addonData[filesplit[0]]["fileVersion"] = semregex.exec(filen); //filesplit[2];
 						addonData[filesplit[0]]["isInstalled"] = true;
-						addonData[filesplit[0]]["installedFileVersion"] = filesplit[2];
+						addonData[filesplit[0]]["installedFileVersion"] = semregex.exec(filen);
 					}
 					//console.log(addonData);
 					return callback(addonData);
