@@ -100,12 +100,43 @@
 		}
 
 		function getInstalledAddons(callback) {
-			return storage.get(addonsFile, function(error, data) {
-				if(error) {
-					$log.error("Could not get installed addons: " + error);
-				} else {
-					return callback(data.installedAddons);
-				}
+			return getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
+				var treeOfSaviorDataDirectory = treeOfSaviorDirectory + "/data/";
+				const fs = require('fs');
+
+				var addonData = [];
+
+				// var semregex = /\bv?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z-]+(?:\.[\da-z-]+)*)?(?:\+[\da-z-]+(?:\.[\da-z-]+)*)?\b/ig;
+				const semregex = /\_(?<file>.+?)-(?<unicode>.+?)-(?<version>v.+?)\.ipf/i;
+
+				fs.readdirSync(treeOfSaviorDataDirectory).forEach(file => {
+					if(file.charAt(0) == "_") //addons installed with the manager start with _
+					{
+						// var filen = file.substr(1, file.length-4); //also removing .ipf
+						// var filesplit = filen.split("-");
+
+						let regexedFile = semregex.exec(file)
+						let filename = regexedFile['file']
+
+						//this is all we can gather from the file
+						// addonData[filesplit[0]] = {};
+						// addonData[filesplit[0]]["file"] = filesplit[0];
+						// addonData[filesplit[0]]["extension"] = "ipf";
+						// addonData[filesplit[0]]["unicode"] = filesplit[1];
+						// addonData[filesplit[0]]["fileVersion"] = semregex.exec(filen); //filesplit[2];
+						// addonData[filesplit[0]]["isInstalled"] = true;
+						// addonData[filesplit[0]]["installedFileVersion"] = semregex.exec(filen);
+						addonData[filename] = {};
+						addonData[filename]["file"] = regexedFile['file'];
+						addonData[filename]["extension"] = "ipf";
+						addonData[filename]["unicode"] = regexedFile['unicode'];
+						// addonData[filename]["fileVersion"] = semregex.exec(filen); //filesplit[2];
+						addonData[filename]["isInstalled"] = true;
+						addonData[filename]["installedFileVersion"] = regexedFile['version'];
+					}
+					//console.log(addonData);
+					return callback(addonData);
+				});
 			});
 		}
 

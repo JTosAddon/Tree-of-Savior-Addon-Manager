@@ -54,6 +54,7 @@
 									$log.info("Loading addon " + addon.name + " by " + addon.author);
 
 									addon.shortname = addon.name;
+									addon.nameSce = $sce.trustAsHtml(addon.name);
 									if(addon.shortname.length > 25) {
 										addon.shortname = addon.shortname.substring(0,24)+"...";
 									}
@@ -74,6 +75,8 @@
 									addon.isOutdated = settings.isAddonOutdated(addon);
 									addon.isBroken = settings.isBrokenAddon(addon);
 
+  								addon.descriptionSce = $sce.trustAsHtml(addon.description);
+
 									addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
 									addon.isDownloading = false;
 
@@ -81,6 +84,7 @@
 										var installedAddon = installedAddons[addon.file];
 
 										if(installedAddon) {
+											console.log("Found installed addon: "+addon.file);
 											addon.installedAddon = installedAddon;
 											addon.isInstalled = true;
 											var semver = require('semver');

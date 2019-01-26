@@ -3,6 +3,8 @@ const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
+const bot = require('./scripts/discordbot').discordbot  // Module to control Discord bot.
+
 // Report crashes to our server.
 // electron.crashReporter.start();
 
@@ -24,7 +26,7 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({width: 1024+100, height: 768, icon: 'resources/tos-exp.ico'});
-	
+
 	mainWindow.setMenuBarVisibility(false);
 
 	mainWindow.setTitle("Tree of Savior Addon Manager");
@@ -33,7 +35,10 @@ app.on('ready', function() {
 	mainWindow.loadURL(`file://${__dirname}/index.html`);
 
 	// Open the DevTools.
-	//mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
+
+	// Discord bot become to login state.
+	bot.login()
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function() {
@@ -43,3 +48,13 @@ app.on('ready', function() {
 		mainWindow = null;
 	});
 });
+
+// ========================================
+// Inter-Process Communication Definitions.
+const { ipcMain } = require('electron')
+
+ipcMain.on('createIssue', (event, arg) => {
+  bot.report(arg, (report) => {
+		event.sender.send('createIssueSucceed', report)
+	})
+})

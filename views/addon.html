@@ -55,6 +55,19 @@
       <md-button data-ng-if="vm.addon.existTwitterAccount" data-ng-click="vm.openTwitter(vm.addon);" aria-label="twitter">
          <img ng-src="{{ vm.photo.twitter }}" ng-style="vm.photo.style" alt="twitter">
       </md-button>
+      <md-button aria-label="reportaddon" ng-if="!vm.addon.isBroken" data-ng-click="vm.createIssue(vm.addon);" style="margin-left: auto;">
+        <md-tooltip md-direction="bottom" style="font-size: 14px;">
+          Report Addon.
+        </md-tooltip>
+        <img ng-src="{{ vm.photo.report }}" ng-style="vm.buttons.style" alt="reportaddon">
+      </md-button>
+      <span aria-label="outdated" ng-show="vm.addon.isOutdated" style="float:left;">
+        <md-tooltip md-direction="bottom">
+          This addon is outdated and might not be working correctly.<br/>
+          Use at your own risk.
+        </md-tooltip>
+        <img ng-src="{{ vm.buttons.notification }}" ng-style="vm.buttons.style" alt="outdated">
+      </span>
       <md-button data-ng-click="vm.install(vm.addon);" aria-label="download" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled && !vm.addon.isBroken">
         <md-tooltip md-direction="bottom" style="font-size: 14px;">
           {{ 'ADDONS.INSTALL' | translate }}

@@ -115,3 +115,7 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 ## JToS
 
 Make a pull request to [JToSAddon/Addons](https://github.com/JToSAddon/Addons) in order to update `managers.json` to point to your addon repository.
+
+## Issues
+
+If there are issues with the manager please open up a [issue](https://github.com/JToSAddon/Tree-of-Savior-Addon-Manager/issues) and send in your `addons.json` which is located at `%AppData%\tree-of-savior-addon-manager`.

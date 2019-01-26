@@ -29,7 +29,8 @@
   				twitter: 'img/twitter.png',
   				github : 'img/GitHub-Mark-64px.png',
   				dropdn : 'img/dropdown-arrow-down.png',
-  				style: {
+  				report : 'img/report.png',
+   				style: {
   					width: '16px',
   					height: '16px'
   				}
@@ -70,6 +71,20 @@
   				const twitterUrl = "https://twitter.com/" + addon.twitterAccount;
   				require('electron').shell.openExternal(twitterUrl);
   			}
+				scope.createIssue = function(addon) {
+					// //Fixme: Needs "are you sure" question.
+					// var title = "Broken-Addon Report: " + addon.name;
+					// var body = "Version: " + addon.fileVersion + "\n Author: " + addon.author + "\n";
+					// var issueURL = "https://github.com/MizukiBelhi/Addons/issues/new?title=" + title + "&body=" + body;
+					if (!confirm('Do you really report it?')) {
+            return
+					}
+					const { ipcRenderer } = require('electron')
+					ipcRenderer.on('createIssueSucceed', (event, arg) => {
+						alert('Report done!!!')
+					})
+					ipcRenderer.send('createIssue', addon)
+				}
 
   			scope.getDescription = addon => {
           let desc = addon.description;
@@ -120,9 +135,6 @@
 
       	scope.changeToBig = function(addon) {
     			console.log('show detail '+addon.name)
-          // let browseController = scope.$parent.$parent.browseController;
-    			// browseController.addon = addon
-    			// browseController.isShowDetail = true
           $scope.$emit('ShowAddonDetail', addon);
     			if(!addon.readme)
     				readmeretriever.getReadme(addon, function(success, readme) {
@@ -142,10 +154,3 @@
       }]
     });
 })();
-
-
-	// AddonController.$inject = ['$scope',"readmeretriever","$sce"];
-
-	// function AddonController($scope,readmeretriever,$sce) {
-	// 	let browseController = $scope.$parent.$parent.browseController
-	// }
