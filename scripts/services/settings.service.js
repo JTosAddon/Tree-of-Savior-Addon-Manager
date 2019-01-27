@@ -39,17 +39,32 @@
 		return service;
 
 
-		function getBrokenAddons($http, service)
+		async function getBrokenAddons($http, service)
 		{
-			var url = "https://raw.githubusercontent.com/MizukiBelhi/Addons/master/broken-addons.json";
-			$http.get(url + "?" + Date.now(), {cache: false}).then(function (res){
-				service.TOSVersion = res.data.tosversion;
-				console.log("ToSVersion: "+service.TOSVersion)
-
-				angular.forEach(res.data.addons, function(addon){
-					service.broken_addons.push(addon);
+			let taskIToS = new Promise((resolve) => {
+				var url = "https://raw.githubusercontent.com/MizukiBelhi/Addons/master/broken-addons.json";
+				$http.get(url + "?" + Date.now(), {cache: false}).then(function (res){
+					console.log("ToSVersion: "+service.TOSVersion)
+					service.TOSVersion = res.data.tosversion;
+					resolve(res)
 				});
-			});
+			})
+			let taskJToS = new Promise((resolve) => {
+				const url = "https://raw.githubusercontent.com/JToSAddon/Addons/master/broken-addons.json";
+				$http.get(url + "?" + Date.now(), {cache: false}).then(function (res){
+					resolve(res)
+				});
+			})
+			await Promise.all([taskIToS, taskJToS]).then((res) => {
+				for (let i = 0; i < res.length; i++) {
+					angular.forEach(res[i].data.addons, function(addon){
+  					console.log('BrokenAddon -> ' + JSON.stringify(addon))
+						service.broken_addons.push(addon);
+					});
+				}
+			}).catch((error) => {
+				console.log(error)
+			})
 		}
 
 		function isBrokenAddon(addon)
@@ -115,7 +130,7 @@
 						// var filen = file.substr(1, file.length-4); //also removing .ipf
 						// var filesplit = filen.split("-");
 
-						let regexedFile = semregex.exec(file)
+						let regexedFile = semregex.exec(file).groups
 						let filename = regexedFile['file']
 
 						//this is all we can gather from the file
@@ -130,7 +145,7 @@
 						addonData[filename]["file"] = regexedFile['file'];
 						addonData[filename]["extension"] = "ipf";
 						addonData[filename]["unicode"] = regexedFile['unicode'];
-						// addonData[filename]["fileVersion"] = semregex.exec(filen); //filesplit[2];
+						addonData[filename]["fileVersion"] = regexedFile['version'];  // if it missing, semver version error occured. why.
 						addonData[filename]["isInstalled"] = true;
 						addonData[filename]["installedFileVersion"] = regexedFile['version'];
 					}

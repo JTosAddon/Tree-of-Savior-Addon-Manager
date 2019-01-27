@@ -30,14 +30,31 @@
     let text = decipher.update(encryptedTokenForGithub, 'hex', 'utf8')
     text += decipher.final('utf8')
 
+    let issueObj = {
+      "title": 'Broken-Addon Report: ' + reportObj.name,
+      "body": `"name": "${reportObj.version}", "version": "${reportObj.version}", "author": "${reportObj.author}"`
+    }
+
     let gh = new GitHub({
       token: text
     })
-    gh.getIssues('JToSAddon', 'Addons').createIssue({
-      "title": 'Broken-Addon Report: ' + reportObj.name,
-      "body": `Version: ${reportObj.version}\nAuthor: ${reportObj.author}\n`
-    }).then(() => {
-      console.log('Successfully created an issue.')
+    gh.getIssues('JToSAddon', 'Addons').listIssues().then((issues) => {
+      let isCreateIssue = true
+      for (let i = 0; i < issues.data.length; i++) {
+        let issue = issues.data[i]
+        if (issue.title.indexOf(reportObj.name) > 0) {
+          isCreateIssue = false
+          break
+        }
+      }
+      if (!isCreateIssue) {
+        // Add +1 reaction to target issue.
+        console.log('Already created.')
+        return
+      }
+      gh.getIssues('JToSAddon', 'Addons').createIssue(issueObj).then(() => {
+        console.log('Successfully created an issue.')
+      })
     })
   })
 
@@ -56,7 +73,8 @@
       }
       const reportObj = {
         "name": addon.name,
-        "version": addon.fileVersion,
+        "file": addon.file,
+        "version": addon.fileVersion.replace('v', ''),  // we do not need the first "v"...
         "author": addon.author,
       }
       channel.send(`${BLOKEN_ADDON_REPORT_PREFIX} ${JSON.stringify(reportObj)}`).then(() => {
