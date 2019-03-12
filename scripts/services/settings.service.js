@@ -29,6 +29,7 @@
 			getBrokenAddons : getBrokenAddons,
 			isAddonOutdated : isAddonOutdated,
 			isBrokenAddon : isBrokenAddon,
+			getClientXML : getClientXML,
 			addonList : {},
 			JTos : {},
 			ITos : {}
@@ -50,7 +51,8 @@
 				});
 			})
 			let taskJToS = new Promise((resolve) => {
-				const url = "https://raw.githubusercontent.com/JToSAddon/Addons/master/broken-addons.json";
+				// const url = "https://raw.githubusercontent.com/JToSAddon/Addons/master/broken-addons.json";
+				const url = "https://raw.githubusercontent.com/weizlogy/Addons/master/broken-addons.json";
 				$http.get(url + "?" + Date.now(), {cache: false}).then(function (res){
 					resolve(res)
 				});
@@ -220,6 +222,21 @@
 
 		function setIsValidDirectory(isValid) {
 			isValidDirectory = isValid;
+		}
+
+		async function getClientXML() {
+			const fs = require('fs');
+			const xml2js = require('xml2js');
+
+      return new Promise((resolve) => {
+				getTreeOfSaviorDirectory((treeOfSaviorDirectory) => {
+					const target = treeOfSaviorDirectory + "/release/client.xml";
+					let clientXML = fs.readFileSync(target, "utf8")
+					new xml2js.Parser({ explicitArray: false }).parseString(clientXML, (error, result) => {
+  					resolve(result)
+					});
+				});
+			});
 		}
 	}
 })();

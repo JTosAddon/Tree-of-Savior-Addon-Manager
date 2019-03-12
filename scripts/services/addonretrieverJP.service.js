@@ -77,6 +77,7 @@
 								addon.isBroken = settings.isBrokenAddon(addon);
 
 								addon.descriptionSce = $sce.trustAsHtml(addon.description);
+								addon.updateInfo = $sce.trustAsHtml(addon.updateInfo || '');
 
 								addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
 								addon.isDownloading = false;
@@ -120,6 +121,7 @@
 								if(db[addon.name] && (db[addon.name].fileVersion == addon.fileVersion) && Object.keys(db[addon.name].transDesc).length){
 									addon.transDesc = JSON.parse(db[addon.name].transDesc);
 								} else {
+									/* 404になっているので一旦消し
                   // requestモジュールでは初回アクセスが異常に遅かったのでangularjsのモジュールに切り替えました
                   $http.get("https://antima-bot-lowlier-columbarium.au-syd.mybluemix.net/users/", {
                     headers: {
@@ -142,6 +144,7 @@
                   }).catch((error) => {
                     // $log.error(error.data);
                   })
+									*/
 								}
 								addon.isShowThisDescription = lang =>{
 									if (!settings.doesTransDesc && !lang)

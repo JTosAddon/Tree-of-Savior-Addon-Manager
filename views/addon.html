@@ -3,7 +3,7 @@
   <md-card-header style="padding: 16px 0 0 16px;">
     <md-card-header-text style="display: flex; flex-direction: row;">
       <span class="md-headlines" style="font-weight: bold;">
-        {{ ::vm.addon.shortname }}
+        {{ vm.addon.shortname }}
       </span>
       <span class="md-subhead" style="line-height: initial; margin-left: 10px; font-size: 0.9em;">
         {{::vm.addon.author}}
@@ -14,7 +14,7 @@
   <md-card-title style="padding: 0 0 0 16px; height: 20px;">
     <md-card-title-text style="flex-direction: row; font-size: 0.9em;">
       <span class="md-subhead" style="padding-top: 0; font-size: 0.9em">
-        {{::vm.addon.fileVersion}} <span style="margin-left: 10px;"> - {{::vm.addon.dateParsed}}</span>
+        {{vm.addon.fileVersion}} <span style="margin-left: 10px;"> - {{vm.addon.dateParsed}}</span>
       </span>
       <span ng-switch="vm.addon.isInstalled" class="md-subhead" style="padding-top: 0; font-size: 0.9em; margin-left: 10px;">
         <span ng-switch-when="true">Installed: {{ vm.addon.installedFileVersion }}</span>
@@ -23,14 +23,14 @@
     </md-card-title-text>
   </md-card-title>
 
-  <md-menu ng-if="getAddonList(vm.addon).length > 1" style="position: relative; top: -30px; left: 45px; height: 1px;">
-    <md-button aria-label="addondropdown" class="md-icon-button" ng-click="openDropdownMenu($mdOpenMenu, $event)">
-      <md-tooltip md-direction="bottom" style="font-size: 14px;">{{::directiveAddonList.length}} versions to select</md-tooltip>
+  <md-menu ng-if="vm.getAddonList(vm.addon).length > 1" style="position: relative; top: -30px; left: 45px; height: 1px;">
+    <md-button aria-label="addondropdown" class="md-icon-button" ng-click="vm.openDropdownMenu($mdMenu, $event)">
+      <md-tooltip md-direction="bottom" style="font-size: 14px;">{{::vm.directiveAddonList.length}} versions to select</md-tooltip>
       <img ng-src="{{ ::vm.photo.dropdn }}" ng-style="vm.photo.style">
     </md-button>
     <md-menu-content width="6">
-      <md-menu-item ng-repeat="item in directiveAddonList">
-        <md-button ng-click="selectDropdown( item )">
+      <md-menu-item ng-repeat="item in vm.directiveAddonList">
+        <md-button ng-click="vm.selectDropdown( item )">
           {{::item.name}} - {{::item.fileVersion}}
         </md-button>
       </md-menu-item>
@@ -39,16 +39,20 @@
 
   <md-card-content style="margin-top: 5px; padding: 0 0 0 16px;">
     <p ng-switch="vm.showFullDesc" data-ng-click="vm.toggleDescription(vm.addon)" style="font-size: 0.9em; outline: 0px solid transparent;">
-      <span ng-switch-when="true" style="white-space: pre-line;">{{ ::vm.getDescription(vm.addon) }}</span>
+      <span ng-switch-when="true" style="white-space: pre-line;">{{ vm.getDescription(vm.addon) }}
+        <span style="display: inline-block; margin-top: 10px; color: red;">{{vm.addon.updateInfo}}</span>
+      </span>
       <span ng-switch-default style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block;">
-        {{ ::vm.getDescription(vm.addon) }}
+        {{ vm.getDescription(vm.addon) }}
       </span>
     </p>
   </md-card-content>
 
-  <md-progress-circular md-mode="indeterminate" md-diameter="32" data-ng-show="vm.addon.isDownloading" style="display: inline; left: 220px; margin-bottom: -32px;"></md-progress-circular>
+  <md-progress-circular
+    md-mode="indeterminate" md-diameter="32" data-ng-show="vm.addon.isDownloading" style="display: inline; left: 220px;">
+  </md-progress-circular>
 
-  <md-card-actions style="display: flex; justify-content: flex-end;">
+  <md-card-actions style="display: flex; justify-content: space-around;">
       <md-button data-ng-click="vm.openWebsite(vm.addon);" aria-label="github">
         <img ng-src="{{ vm.photo.github }}" ng-style="vm.photo.style" alt="github">
       </md-button>

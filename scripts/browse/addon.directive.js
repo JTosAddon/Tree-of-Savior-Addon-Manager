@@ -71,11 +71,12 @@
   				const twitterUrl = "https://twitter.com/" + addon.twitterAccount;
   				require('electron').shell.openExternal(twitterUrl);
   			}
-				scope.createIssue = function(addon) {
+				scope.createIssue = async function(addon) {
 					// //Fixme: Needs "are you sure" question.
 					// var title = "Broken-Addon Report: " + addon.name;
 					// var body = "Version: " + addon.fileVersion + "\n Author: " + addon.author + "\n";
 					// var issueURL = "https://github.com/MizukiBelhi/Addons/issues/new?title=" + title + "&body=" + body;
+
 					if (!confirm('Do you really report it?')) {
             return
 					}
@@ -83,6 +84,11 @@
 					ipcRenderer.on('createIssueSucceed', (event, arg) => {
 						alert('Report done!!!')
 					})
+          // get extra info
+          let clientXML = await settings.getClientXML()
+					addon.extraReportInfo = {
+						serverNation: clientXML.ClientCfgFile.Locale.$.ServiceNation
+					}
 					ipcRenderer.send('createIssue', addon)
 				}
 
@@ -101,14 +107,14 @@
           scope.showFullDesc = !scope.showFullDesc;
         }
 
-  			scope.openDropdownMenu = function($mdOpenMenu, ev)
+  			scope.openDropdownMenu = function($mdMenu, ev)
   			{
-        			$mdOpenMenu(ev);
+        			$mdMenu.open(ev);
   			}
 
   			scope.selectDropdown = function(selectedAddon)
   			{
-  				scope.vm.addon = selectedAddon;
+  				scope.addon = selectedAddon;
   			}
 
   			scope.getAddonList = function(selectedAddon)

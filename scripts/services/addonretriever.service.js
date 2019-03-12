@@ -76,6 +76,7 @@
 									addon.isBroken = settings.isBrokenAddon(addon);
 
   								addon.descriptionSce = $sce.trustAsHtml(addon.description);
+									addon.updateInfo = $sce.trustAsHtml(addon.updateInfo || '');
 
 									addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
 									addon.isDownloading = false;

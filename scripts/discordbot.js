@@ -19,43 +19,43 @@
   })
 
   client.on('message', (message) => {
-    let content = message.content
-    if (!content.startsWith(BLOKEN_ADDON_REPORT_PREFIX)) {
-      return
-    }
-    let reportObj = JSON.parse(content.replace(BLOKEN_ADDON_REPORT_PREFIX, ''))
-    console.log(reportObj)
+    // let content = message.content
+    // if (!content.startsWith(BLOKEN_ADDON_REPORT_PREFIX)) {
+    //   return
+    // }
+    // let reportObj = JSON.parse(content.replace(BLOKEN_ADDON_REPORT_PREFIX, ''))
+    // console.log(reportObj)
 
-    let decipher = crypto.createDecipher('aes256', process.type)
-    let text = decipher.update(encryptedTokenForGithub, 'hex', 'utf8')
-    text += decipher.final('utf8')
+    // let decipher = crypto.createDecipher('aes256', process.type)
+    // let text = decipher.update(encryptedTokenForGithub, 'hex', 'utf8')
+    // text += decipher.final('utf8')
 
-    let issueObj = {
-      "title": 'Broken-Addon Report: ' + reportObj.name,
-      "body": `"name": "${reportObj.version}", "version": "${reportObj.version}", "author": "${reportObj.author}"`
-    }
+    // let issueObj = {
+    //   "title": 'Broken-Addon Report: ' + reportObj.name,
+    //   "body": `"name": "${reportObj.version}", "version": "${reportObj.version}", "author": "${reportObj.author}"`
+    // }
 
-    let gh = new GitHub({
-      token: text
-    })
-    gh.getIssues('JToSAddon', 'Addons').listIssues().then((issues) => {
-      let isCreateIssue = true
-      for (let i = 0; i < issues.data.length; i++) {
-        let issue = issues.data[i]
-        if (issue.title.indexOf(reportObj.name) > 0) {
-          isCreateIssue = false
-          break
-        }
-      }
-      if (!isCreateIssue) {
-        // Add +1 reaction to target issue.
-        console.log('Already created.')
-        return
-      }
-      gh.getIssues('JToSAddon', 'Addons').createIssue(issueObj).then(() => {
-        console.log('Successfully created an issue.')
-      })
-    })
+    // let gh = new GitHub({
+    //   token: text
+    // })
+    // gh.getIssues('JToSAddon', 'Addons').listIssues().then((issues) => {
+    //   let isCreateIssue = true
+    //   for (let i = 0; i < issues.data.length; i++) {
+    //     let issue = issues.data[i]
+    //     if (issue.title.indexOf(reportObj.name) > 0) {
+    //       isCreateIssue = false
+    //       break
+    //     }
+    //   }
+    //   if (!isCreateIssue) {
+    //     // Add +1 reaction to target issue.
+    //     console.log('Already created.')
+    //     return
+    //   }
+    //   gh.getIssues('JToSAddon', 'Addons').createIssue(issueObj).then(() => {
+    //     console.log('Successfully created an issue.')
+    //   })
+    // })
   })
 
   exports.discordbot = {
@@ -76,6 +76,7 @@
         "file": addon.file,
         "version": addon.fileVersion.replace('v', ''),  // we do not need the first "v"...
         "author": addon.author,
+        "server": addon.extraReportInfo.serverNation,
       }
       channel.send(`${BLOKEN_ADDON_REPORT_PREFIX} ${JSON.stringify(reportObj)}`).then(() => {
         console.log(`Successfully reported addon [${addon.name}].`)
