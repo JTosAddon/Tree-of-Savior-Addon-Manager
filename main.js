@@ -5,6 +5,18 @@ const BrowserWindow = electron.BrowserWindow;  // Module to create native browse
 
 const bot = require('./scripts/discordbot').discordbot  // Module to control Discord bot.
 
+// AutoUpdater ignore first time update.
+//  see => https://github.com/electron/windows-installer#handling-squirrel-events
+//      => https://github.com/mongodb-js/electron-squirrel-startup
+if (require('electron-squirrel-startup')) app.quit();
+
+// AutoUpdater
+require('update-electron-app')({
+  repo: 'JTosAddon/Tree-of-Savior-Addon-Manager',
+  // repo: 'weizlogy/Addons',
+  updateInterval: '1 hour',
+})
+
 // Report crashes to our server.
 // electron.crashReporter.start();
 
@@ -25,7 +37,7 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 	// Create the browser window.
-	mainWindow = new BrowserWindow({width: 1024+100, height: 768, icon: 'resources/tos-exp.ico'});
+	mainWindow = new BrowserWindow({width: 1024+100, height: 768, icon: 'resources/tos-exp-mod.ico'});
 
 	mainWindow.setMenuBarVisibility(false);
 

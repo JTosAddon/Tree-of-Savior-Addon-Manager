@@ -5,8 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "package": "electron-packager . ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --asar --prune=true --icon=resources/tos-exp-256.ico",
-    "lint": "eslint scripts"
+    "package": "electron-packager . ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT% --out=dist --platform=win32 --arch=ia32 --asar --prune --icon=resources/tos-exp-mod.ico",
+    "installer": "node .\\builds\\windows-installer.js ToS.Addon.Manager-%APPVEYOR_REPO_COMMIT%",
+    "lint": "eslint scripts",
+    "test": "echo %APPVEYOR_REPO_COMMIT%"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "electron": "^3.0.10",
     "electron-packager": "^13.0.1",
+    "electron-winstaller": "^3.0.4",
     "eslint": "^5.9.0"
   },
   "dependencies": {
@@ -40,6 +43,7 @@
     "angular-ui-router": "^1.0.20",
     "discord.js": "^11.4.2",
     "electron-json-storage": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "github-api": "^3.0.0",
     "marked": "^0.3.5",
     "mkdirp": "^0.5.1",
@@ -48,6 +52,7 @@
     "request": "^2.81.0",
     "request-progress": "^2.0.1",
     "semver": "^5.6.0",
+    "update-electron-app": "^1.3.0",
     "xml2js": "^0.4.17"
   }
 }
